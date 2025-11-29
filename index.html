@@ -52,7 +52,6 @@
         const { useState } = React;
 
         // --- ICON DEFINITIONS (Inline for stability) ---
-        // Replacing external Lucide CDN to prevent "Element type is invalid" errors.
         
         const IconBase = ({ children, size = 24, color = "currentColor", ...props }) => (
             <svg 
@@ -133,7 +132,6 @@
 
         // --- COMPONENT DEFINITIONS ---
 
-        // Component to render a clickable project card
         const ProjectCard = ({ role, company, period, link, visual }) => (
             <a 
               href={link} 
@@ -155,7 +153,7 @@
               }}
             >
               <div className="relative w-full aspect-video rounded-3xl overflow-hidden mb-4 border border-[#3a3a3a]">
-                {/* Placeholder for Project Visual */}
+                {/* Visual Placeholder */}
                 <img 
                   src={`https://placehold.co/400x200/2a2a2a/d4b9ff?text=${visual.replace(/\s/g, '+')}`} 
                   alt={`Visual for ${role}`} 
@@ -180,7 +178,6 @@
         const App = () => {
           const [activeTab, setActiveTab] = useState('experience');
           
-          // --- Education Data ---
           const educationData = [
             {
               level: "International AS & A Level (XII)",
@@ -196,7 +193,6 @@
             }
           ];
 
-          // --- Experience Data ---
           const experienceData = [
             {
               role: "Head Designer",
@@ -228,7 +224,6 @@
             }
           ];
 
-          // --- Achievement Data ---
           const achievementData = [
             {
               role: "Community Outreach Lead",
@@ -263,7 +258,7 @@
           return (
             <div className="min-h-screen bg-charcoal text-[#e0e0e0] font-sans selection:bg-lavender selection:text-charcoal pb-20">
               
-              {/* Navbar / Header */}
+              {/* Navbar */}
               <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center z-50 relative">
                 <div className="text-2xl font-serif font-bold tracking-tighter text-lavender">AM.</div>
                 <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
@@ -275,7 +270,7 @@
 
               <main className="max-w-4xl mx-auto px-6 mt-10">
                 
-                {/* Hero Section - About Me */}
+                {/* Hero Section */}
                 <section className="flex flex-col md:flex-row gap-12 items-center mb-24">
                   <div className="w-full md:w-1/2 space-y-6 order-2 md:order-1">
                     <div className="inline-block px-4 py-1.5 rounded-full bg-[#2a2a2a] border border-[#3a3a3a] text-xs font-medium text-lavender tracking-wide mb-2">
@@ -290,11 +285,15 @@
                     </p>
                     
                     <div className="flex gap-4 pt-4">
-                      <button className="px-8 py-3 bg-lavender text-charcoal rounded-full font-semibold hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,185,255,0.3)]">
+                      {/* FIX: Converted button to <a> tag and linked to the PDF file, including the download attribute */}
+                      <a
+                        href="Aditya Maurya (2).pdf" 
+                        download="Aditya_Maurya_Resume.pdf"
+                        className="px-8 py-3 bg-lavender text-charcoal rounded-full font-semibold hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,185,255,0.3)]"
+                      >
                         Download Resume
-                      </button>
+                      </a>
                       
-                      {/* Quick Contact Icons */}
                       <a href="mailto:adi.maur7@gmail.com" className="p-3 rounded-full bg-[#2a2a2a] text-white hover:bg-[#333] transition-colors border border-[#333]" title="Email Me">
                         <Mail size={20} />
                       </a>
@@ -307,8 +306,9 @@
                   {/* Profile Image Area */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
                     <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-[#222] border border-[#333] shadow-2xl shadow-lavender/10 group">
+                       {/* FIX 1: Changed file path to profile.png */}
                        <img 
-                         src="Untitled design.jpg" 
+                         src="profile.png" 
                          alt="Aditya Maurya Profile" 
                          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" 
                        />
@@ -398,7 +398,7 @@
                        {/* Call Action */}
                        <a 
                          href="tel:+917977031905" 
-                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto"
+                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
                          <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
                            <Phone size={20} />
@@ -406,14 +406,13 @@
                          <div className="text-left">
                            <p className="text-xs text-gray-500 uppercase tracking-wider">Call Me</p>
                            <p className="text-white font-medium">+91 7977031905</p>
-                           <div class="absolute inset-0 bg-red-500/0"></div>
                          </div>
                        </a>
 
                        {/* Email Action */}
                        <a 
                          href="mailto:adi.maur7@gmail.com" 
-                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto"
+                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
                          <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
                            <Mail size={20} />
