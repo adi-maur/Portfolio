@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Maurya | Graphic Designer & Storyteller</title>
+    
+    <!-- Load Tailwind CSS from CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'charcoal': '#1a1a1a',
+              'lavender': '#d4b9ff',
+              'dark-secondary': '#222',
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <!-- Load Google Fonts for a distinct look -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Load React and ReactDOM Libraries -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Load Babel for JSX support in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Custom styling (if needed) - currently using Tailwind -->
+    <style>
+        /* Optional custom scrollbar styling for aesthetics */
+        body {
+            scrollbar-color: #333 #1a1a1a;
+            scrollbar-width: thin;
+        }
+    </style>
+</head>
+<body class="bg-charcoal">
+
+    <!-- This is where your React component will be rendered -->
+    <div id="root"></div>
+
+    <!-- Load the main application logic (formerly App.jsx) -->
+    <script type="text/babel" src="app.js"></script>
+    
+    <!-- We'll keep the image file name simple for easy linking -->
+    <!-- You will upload: Untitled design.jpg -->
+    
+</body>
+</html>
