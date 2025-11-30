@@ -13,10 +13,9 @@
         theme: {
           extend: {
             colors: {
-              // Updated Palette: "Alive" Dark Mode
               'rich-black': '#0f0f11',      // Deep, rich background
               'card-dark': '#18181b',       // Slightly lighter for cards
-              'lavender': '#c4b5fd',        // Primary accent (unchanged, works well)
+              'lavender': '#c4b5fd',        // Primary accent
               'lavender-glow': '#8b5cf6',   // Deeper purple for subtle glows
               'text-primary': '#f3f4f6',    // High contrast text
               'text-secondary': '#9ca3af',  // Muted text
@@ -26,23 +25,22 @@
               serif: ['Playfair Display', 'serif'],
             },
             backgroundImage: {
-                'alive-gradient': 'radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0f11 60%)', // Subtle top glow
+                'alive-gradient': 'radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0f11 60%)', 
             }
           }
         }
       }
     </script>
-    <!-- Load Google Fonts for a distinct look -->
+    <!-- Load Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
     <!-- Load React and ReactDOM Libraries -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <!-- Load Babel for JSX support in the browser -->
+    <!-- Load Babel for JSX support -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        /* Optional custom scrollbar styling for aesthetics */
         body {
             scrollbar-color: #333 #0f0f11;
             scrollbar-width: thin;
@@ -54,109 +52,36 @@
     <!-- Subtle Background Glow Effect -->
     <div class="fixed inset-0 bg-alive-gradient opacity-40 pointer-events-none z-0"></div>
 
-    <!-- This is where your React component will be rendered -->
+    <!-- React Root -->
     <div id="root" class="relative z-10"></div>
 
-    <!-- MAIN REACT APPLICATION LOGIC (Consolidated from app.js) -->
+    <!-- MAIN REACT APPLICATION LOGIC -->
     <script type="text/babel">
         const { useState } = React;
 
-        // --- ICON DEFINITIONS (Inline for stability) ---
-        
+        // --- ICON DEFINITIONS ---
         const IconBase = ({ children, size = 24, color = "currentColor", ...props }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width={size} 
-                height={size} 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke={color} 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                {...props}
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
                 {children}
             </svg>
         );
 
-        const Briefcase = (props) => (
-            <IconBase {...props}>
-                <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-            </IconBase>
-        );
+        const Mail = (props) => ( <IconBase {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconBase> );
+        const Phone = (props) => ( <IconBase {...props}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></IconBase> );
+        const BookOpen = (props) => ( <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase> );
+        const ExternalLink = (props) => ( <IconBase {...props}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase> );
 
-        const Award = (props) => (
-            <IconBase {...props}>
-                <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
-            </IconBase>
-        );
-
-        const GraduationCap = (props) => (
-            <IconBase {...props}>
-                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-            </IconBase>
-        );
-
-        const MapPin = (props) => (
-            <IconBase {...props}>
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-            </IconBase>
-        );
-
-        const Mail = (props) => (
-            <IconBase {...props}>
-                <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </IconBase>
-        );
-
-        const Phone = (props) => (
-            <IconBase {...props}>
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </IconBase>
-        );
-
-        const BookOpen = (props) => (
-            <IconBase {...props}>
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-            </IconBase>
-        );
-
-        const ChevronRight = (props) => (
-            <IconBase {...props}>
-                <path d="m9 18 6-6-6-6"/>
-            </IconBase>
-        );
-
-        const ExternalLink = (props) => (
-            <IconBase {...props}>
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
-            </IconBase>
-        );
-
-        // --- COMPONENT DEFINITIONS ---
-
+        // --- COMPONENT: ProjectCard ---
+        // FIX: Removed the onClick handler that was causing the simulation popup. 
+        // Now it works as a standard link <a> tag.
         const ProjectCard = ({ role, company, period, link, visual }) => (
             <a 
               href={link} 
               className="group p-1.5 bg-card-dark hover:bg-[#27272a] border border-[#333] hover:border-lavender/40 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1 block shadow-lg hover:shadow-lavender/5"
-              onClick={(e) => {
-                e.preventDefault(); 
-                
-                const messageBox = document.createElement('div');
-                messageBox.className = 'fixed inset-0 flex items-center justify-center bg-black/70 z-50 animate-in fade-in duration-200';
-                messageBox.innerHTML = `
-                  <div class="bg-rich-black p-6 rounded-2xl shadow-2xl border border-lavender max-w-sm text-center transform scale-100">
-                    <h4 class="text-xl text-white font-bold mb-3">Project Link Clicked!</h4>
-                    <p class="text-text-secondary mb-4">Simulating navigation to <strong>${link}</strong>.</p>
-                    <button onclick="this.parentNode.parentNode.remove()" class="mt-4 px-6 py-2 bg-lavender text-rich-black rounded-full font-semibold hover:bg-white transition-colors">Close</button>
-                  </div>
-                `;
-                document.body.appendChild(messageBox);
-              }}
             >
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-3 border border-[#333]">
                 {/* Visual Placeholder */}
+                {/* FIX: Changed class="w-full..." to className="w-full..." for React compatibility */}
                 <img 
                   src={`https://placehold.co/400x200/2a2a2a/d4b9ff?text=${visual.replace(/\s/g, '+')}`} 
                   alt={`Visual for ${role}`} 
@@ -164,20 +89,18 @@
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
                 
-                {/* Period Badge - Moved inside image for cleaner look */}
+                {/* Period Badge */}
                 <div className="absolute bottom-3 left-3">
                     <span className="text-[10px] font-semibold text-white bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-white/10 uppercase tracking-wide">{period}</span>
                 </div>
               </div>
               
               <div className="px-2 pb-3">
-                {/* UNIFORM TYPOGRAPHY: Fixed font sizes for consistency */}
                 <h3 className="text-lg font-serif text-white mb-1 group-hover:text-lavender transition-colors line-clamp-1">{role}</h3>
-                <p className="text-xs text-text-secondary font-medium uppercase tracking-wider">{company}</p>
+                <p class="text-xs text-text-secondary font-medium uppercase tracking-wider">{company}</p>
               </div>
             </a>
-          );
-
+        );
 
         const App = () => {
           const [activeTab, setActiveTab] = useState('experience');
@@ -202,7 +125,7 @@
               role: "Head Designer",
               company: "TUMO",
               period: "Jan '25 - Mar '25",
-              link: "projects/tumo.html", 
+              link: "projects/tumo.html",  // LINKS DIRECTLY TO THE FILE
               visual: "TUMO" 
             },
             {
@@ -220,7 +143,7 @@
               visual: "Edtech"
             },
             {
-              role: "Curriculum Dev Intern", // Shortened for uniformity
+              role: "Curriculum Dev Intern",
               company: "Shikha Institute",
               period: "Oct '24 - Nov '24",
               link: "projects/shikha.html", 
@@ -276,7 +199,6 @@
                     <div className="inline-block px-4 py-1.5 rounded-full bg-card-dark border border-[#333] text-[10px] font-bold text-lavender tracking-widest uppercase mb-2">
                       Based in Mumbai, India
                     </div>
-                    {/* TYPOGRAPHY FIX: Adjusted font sizes for emphasis */}
                     <h1 className="text-6xl md:text-7xl font-serif font-medium leading-none text-white tracking-tight">
                       Hi, I'm <br/><span className="text-lavender italic">Aditya.</span>
                     </h1>
@@ -288,7 +210,6 @@
                     </p>
                     
                     <div className="flex gap-4 pt-6">
-                      {/* FIX: Converted button to <a> tag and linked to the PDF file, including the download attribute */}
                       <a
                         href="Aditya Maurya (2).pdf" 
                         download="Aditya_Maurya_Resume.pdf"
@@ -309,7 +230,6 @@
                   {/* Profile Image Area */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
                     <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-card-dark border border-[#333] shadow-2xl shadow-lavender/5 group rotate-2 hover:rotate-0 transition-transform duration-700">
-                       {/* FIX 1: Changed file path to profile.png */}
                        <img 
                          src="profile.png" 
                          alt="Aditya Maurya Profile" 
@@ -389,7 +309,7 @@
                   </div>
                 </section>
 
-                {/* Footer with Contact Actions - REMOVED SOCIAL LINKS */}
+                {/* Footer */}
                 <footer id="contact" className="py-16 border-t border-[#333] relative">
                   <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-4xl font-serif text-white mb-6">Let's create something <span className="text-lavender italic">beautiful.</span></h2>
@@ -398,7 +318,6 @@
                     </p>
                     
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
-                       {/* Call Action - FIXED: Removed the overlapping empty div */}
                        <a 
                          href="tel:+917977031905" 
                          className="flex items-center gap-4 px-6 py-3 bg-card-dark border border-[#333] rounded-2xl hover:bg-[#202020] hover:border-lavender transition-all group w-full sm:w-auto relative"
@@ -412,7 +331,6 @@
                          </div>
                        </a>
 
-                       {/* Email Action */}
                        <a 
                          href="mailto:adi.maur7@gmail.com" 
                          className="flex items-center gap-4 px-6 py-3 bg-card-dark border border-[#333] rounded-2xl hover:bg-[#202020] hover:border-lavender transition-all group w-full sm:w-auto relative"
