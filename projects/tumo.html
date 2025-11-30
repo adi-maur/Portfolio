@@ -18,17 +18,19 @@
               'lavender-glow': '#8b5cf6',
               'text-primary': '#f3f4f6',
               'text-secondary': '#9ca3af',
+              'deep-violet': '#2e1065',
             },
             fontFamily: {
               sans: ['Manrope', 'sans-serif'],
               serif: ['Playfair Display', 'serif'],
             },
             backgroundImage: {
-                'alive-gradient': 'radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0f11 60%)',
+                'alive-gradient': 'radial-gradient(circle at 50% 0%, #4c1d95 0%, #2e1065 30%, #0f0f11 70%)',
             },
             animation: {
                 'fade-in': 'fadeIn 1s ease-out forwards',
                 'slide-up': 'slideUp 0.8s ease-out forwards',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -61,41 +63,46 @@
         /* Lightbox Fade In/Out */
         .lightbox { visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
         .lightbox.open { visibility: visible; opacity: 1; }
+
+        /* Icon Hover Effect */
+        .icon-hover-target:hover svg {
+            stroke: #fff; /* Turn white on hover */
+            filter: drop-shadow(0 0 5px #8b5cf6); /* Add glow */
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-rich-black text-text-primary min-h-screen relative overflow-x-hidden">
 
-    <!-- Background Glow -->
-    <div class="fixed inset-0 bg-alive-gradient opacity-30 pointer-events-none z-0"></div>
+    <!-- Livelier Background Glow -->
+    <div class="fixed inset-0 bg-alive-gradient opacity-50 pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-96 h-96 bg-lavender-glow opacity-20 rounded-full blur-[100px] pointer-events-none z-0 animate-pulse-slow"></div>
 
     <!-- Navigation -->
     <nav class="w-full max-w-5xl mx-auto p-6 flex justify-between items-center relative z-20">
-        <div class="text-2xl font-serif font-bold tracking-tighter text-lavender">AM.</div>
+        <div class="text-2xl font-serif font-bold tracking-tighter text-lavender drop-shadow-md">AM.</div>
         <div class="flex gap-6 text-sm font-medium">
-            <a href="../index.html" class="text-text-secondary hover:text-lavender transition-colors">About Me</a>
-            <span class="text-white cursor-default">TUMO Project</span>
+            <a href="../index.html" class="text-text-secondary hover:text-white transition-colors hover:scale-105 transform duration-200">About Me</a>
+            <span class="text-white cursor-default font-bold border-b-2 border-lavender pb-1">TUMO Project</span>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 pb-20 relative z-10">
         
-        <!-- Hero Section: Image Separate from Text -->
+        <!-- Hero Section -->
         <section class="mb-16">
-            <!-- 1. The Banner Image (Clean Header) -->
-            <div class="rounded-[2rem] overflow-hidden mb-8 shadow-2xl border border-[#333] hover-scale relative group">
+            <div class="rounded-[2rem] overflow-hidden mb-8 shadow-2xl border border-[#333] hover-scale relative group ring-1 ring-white/10 hover:ring-lavender/50 transition-all duration-500">
                 <img src="tumo_banner.png" 
                      onerror="this.onerror=null; this.src='tumo_banner.jpg';" 
                      alt="TUMO Conference Banner" 
                      class="w-full h-auto object-cover shadow-lavender/5">
-                <!-- Added a subtle bottom fade to blend with the background -->
                 <div class="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent opacity-30"></div>
             </div>
 
-            <!-- 2. The Text Details (Below the Image, Cleanly Separated) -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-[#333] pb-8">
                 <div>
-                    <span class="bg-lavender text-rich-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">Head Designer</span>
-                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-2 leading-tight">TUMO AI/Teen Conference</h1>
+                    <span class="bg-lavender-glow text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block shadow-lg shadow-lavender-glow/40">Head Designer</span>
+                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-2 leading-tight drop-shadow-xl">TUMO AI/Teen Conference</h1>
                     <p class="text-lavender text-lg font-light">Jan 2025 - Mar 2025</p>
                 </div>
             </div>
@@ -104,7 +111,7 @@
         <!-- Role & Details -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
             <div class="md:col-span-2 space-y-6">
-                <h2 class="text-3xl font-serif text-white">My Role</h2>
+                <h2 class="text-3xl font-serif text-white drop-shadow-md">My Role</h2>
                 <p class="text-text-secondary leading-relaxed text-lg font-light">
                     As the <strong>Head Designer</strong> for the TUMO International AI Conference, I led the visual branding for an event hosting 300+ attendees. My goal was to craft an identity that felt futuristic yet approachable.
                 </p>
@@ -113,23 +120,23 @@
                 </p>
             </div>
             
-            <div class="bg-card-dark p-8 rounded-[2rem] border border-[#333] h-fit shadow-xl">
+            <div class="bg-card-dark/80 backdrop-blur-md p-8 rounded-[2rem] border border-[#333] h-fit shadow-xl hover:shadow-lavender-glow/20 transition-all duration-300 group">
                 <h3 class="text-lg font-serif text-white mb-6 border-b border-[#333] pb-4">Project Data</h3>
                 <ul class="space-y-5 text-sm text-text-secondary">
-                    <li class="flex items-center gap-4">
-                        <i data-lucide="pen-tool" class="text-lavender w-5 h-5"></i>
+                    <li class="flex items-center gap-4 icon-hover-target transition-transform hover:translate-x-1">
+                        <i data-lucide="pen-tool" class="text-lavender w-5 h-5 transition-colors duration-300"></i>
                         <span>Lead Designer & Host</span>
                     </li>
-                    <li class="flex items-center gap-4">
-                        <i data-lucide="layers" class="text-lavender w-5 h-5"></i>
+                    <li class="flex items-center gap-4 icon-hover-target transition-transform hover:translate-x-1">
+                        <i data-lucide="layers" class="text-lavender w-5 h-5 transition-colors duration-300"></i>
                         <span>10+ Designs Created</span>
                     </li>
-                     <li class="flex items-center gap-4">
-                        <i data-lucide="users" class="text-lavender w-5 h-5"></i>
+                     <li class="flex items-center gap-4 icon-hover-target transition-transform hover:translate-x-1">
+                        <i data-lucide="users" class="text-lavender w-5 h-5 transition-colors duration-300"></i>
                         <span>Shared with 500+ People</span>
                     </li>
-                    <li class="flex items-center gap-4">
-                        <i data-lucide="clock" class="text-lavender w-5 h-5"></i>
+                    <li class="flex items-center gap-4 icon-hover-target transition-transform hover:translate-x-1">
+                        <i data-lucide="clock" class="text-lavender w-5 h-5 transition-colors duration-300"></i>
                         <span>Jan 2025 - Mar 2025</span>
                     </li>
                 </ul>
@@ -140,73 +147,71 @@
         <section class="mb-24 relative">
             <div class="flex justify-between items-end mb-8">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lavender/10 border border-lavender/20 text-lavender text-xs font-bold uppercase tracking-widest mb-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lavender/10 border border-lavender/20 text-lavender text-xs font-bold uppercase tracking-widest mb-3 shadow-sm shadow-lavender/10">
                         <i data-lucide="sparkles" class="w-3 h-3"></i> Designed by Me
                     </div>
                     <h2 class="text-3xl font-serif text-white">Selected Works</h2>
                     <p class="text-xs text-text-secondary mt-2">Click any image to enlarge and view details.</p>
                 </div>
                 
-                <!-- Navigation Buttons -->
                 <div class="flex gap-3">
-                    <button onclick="scrollGallery(-1)" class="p-4 rounded-full bg-card-dark border border-[#333] hover:bg-lavender hover:text-rich-black transition-all">
+                    <button onclick="scrollGallery(-1)" class="p-4 rounded-full bg-card-dark border border-[#333] text-lavender hover:bg-lavender-glow hover:text-white transition-all shadow-lg active:scale-95 icon-hover-target">
                         <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="scrollGallery(1)" class="p-4 rounded-full bg-card-dark border border-[#333] hover:bg-lavender hover:text-rich-black transition-all">
+                    <button onclick="scrollGallery(1)" class="p-4 rounded-full bg-card-dark border border-[#333] text-lavender hover:bg-lavender-glow hover:text-white transition-all shadow-lg active:scale-95 icon-hover-target">
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Scrollable Container -->
             <div id="gallery" class="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 px-1 scroll-smooth">
                 
                 <!-- Work Item 1 -->
-                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
-                     onclick="openLightbox('tumo_work_1.jpg', 'Speakers Lineup')">
-                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer transition-transform duration-300 hover:-translate-y-2" 
+                     onclick="openLightbox(this, 'Speakers Lineup')">
+                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video ring-1 ring-white/5 hover:ring-lavender/40 transition-all">
                         <img src="tumo_work_1.jpg" onerror="this.onerror=null; this.src='tumo_work_1.png';" class="w-full h-full object-cover">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Speakers Lineup</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium group-hover:text-lavender transition-colors">Speakers Lineup</p>
                 </div>
 
                 <!-- Work Item 2 -->
-                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
-                     onclick="openLightbox('tumo_work_2.jpg', 'Teen Speakers Display')">
-                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer transition-transform duration-300 hover:-translate-y-2" 
+                     onclick="openLightbox(this, 'Teen Speakers Display')">
+                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video ring-1 ring-white/5 hover:ring-lavender/40 transition-all">
                         <img src="tumo_work_2.jpg" onerror="this.onerror=null; this.src='tumo_work_2.png';" class="w-full h-full object-cover">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Teen Speakers</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium group-hover:text-lavender transition-colors">Teen Speakers</p>
                 </div>
 
                 <!-- Work Item 3 -->
-                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
-                     onclick="openLightbox('tumo_work_3.jpg', 'Workshop Poster')">
-                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer transition-transform duration-300 hover:-translate-y-2" 
+                     onclick="openLightbox(this, 'Workshop Poster')">
+                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50 ring-1 ring-white/5 hover:ring-lavender/40 transition-all">
                         <img src="tumo_work_3.jpg" onerror="this.onerror=null; this.src='tumo_work_3.png';" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Workshop Poster</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium group-hover:text-lavender transition-colors">Workshop Poster</p>
                 </div>
 
                 <!-- Work Item 4 -->
-                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
-                     onclick="openLightbox('tumo_work_4.jpg', 'Competition Flyer')">
-                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer transition-transform duration-300 hover:-translate-y-2" 
+                     onclick="openLightbox(this, 'Competition Flyer')">
+                    <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50 ring-1 ring-white/5 hover:ring-lavender/40 transition-all">
                         <img src="tumo_work_4.jpg" onerror="this.onerror=null; this.src='tumo_work_4.png';" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Competition Flyer</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium group-hover:text-lavender transition-colors">Competition Flyer</p>
                 </div>
 
             </div>
         </section>
 
         <!-- Hosting Spotlight -->
-        <section class="bg-card-dark rounded-[2.5rem] p-8 md:p-12 border border-[#333] flex flex-col md:flex-row gap-12 items-center relative overflow-hidden group hover:border-lavender/30 transition-colors">
-            <!-- Glow Effect -->
-            <div class="absolute top-0 right-0 w-96 h-96 bg-lavender/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-lavender/10 transition-colors duration-700"></div>
+        <section class="bg-card-dark rounded-[2.5rem] p-8 md:p-12 border border-[#333] flex flex-col md:flex-row gap-12 items-center relative overflow-hidden group hover:border-lavender/40 transition-all duration-500 shadow-2xl">
+            <!-- Stronger Glow Effect -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-lavender-glow/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-lavender-glow/30 transition-colors duration-700"></div>
 
             <div class="w-full md:w-1/2 space-y-6 relative z-10">
-                <div class="inline-block px-4 py-1.5 bg-lavender text-rich-black text-xs font-bold rounded-full uppercase tracking-wider">
+                <div class="inline-block px-4 py-1.5 bg-lavender-glow text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-lavender-glow/40">
                     Beyond Design
                 </div>
                 <h2 class="text-4xl font-serif text-white leading-tight">Hosting the <br/><span class="text-lavender italic">Global Stage</span></h2>
@@ -218,13 +223,13 @@
             </div>
             
             <div class="w-full md:w-1/2 relative">
-                <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-out">
-                    <img src="tumo_host.jpg" onerror="this.onerror=null; this.src='tumo_host.png';" class="w-full h-auto object-cover">
+                <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-out hover-scale ring-1 ring-white/5 group-hover:ring-lavender/30">
+                    <img src="tumo_host.jpg" onerror="this.onerror=null; this.src='tumo_host.png';" alt="Aditya Hosting" class="w-full h-auto object-cover">
                 </div>
             </div>
         </section>
 
-        <!-- Unique Footer Contact -->
+        <!-- Footer -->
         <footer id="contact" class="py-16 border-t border-[#333] relative">
             <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-3xl font-serif text-white mb-6">Ready to collaborate?</h2>
@@ -233,13 +238,13 @@
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
-                <a href="tel:+917977031905" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-[#202020] hover:border-lavender transition-all">
-                    <i data-lucide="phone" class="w-4 h-4 text-lavender"></i>
+                <a href="tel:+917977031905" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-lavender-glow hover:text-white hover:border-lavender-glow transition-all group shadow-lg icon-hover-target">
+                    <i data-lucide="phone" class="w-4 h-4 text-lavender group-hover:text-white transition-colors"></i>
                     <span class="text-sm font-bold text-white">Call Me</span>
                 </a>
 
-                <a href="mailto:adi.maur7@gmail.com" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-[#202020] hover:border-lavender transition-all">
-                    <i data-lucide="mail" class="w-4 h-4 text-lavender"></i>
+                <a href="mailto:adi.maur7@gmail.com" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-lavender-glow hover:text-white hover:border-lavender-glow transition-all group shadow-lg icon-hover-target">
+                    <i data-lucide="mail" class="w-4 h-4 text-lavender group-hover:text-white transition-colors"></i>
                     <span class="text-sm font-bold text-white">Email Me</span>
                 </a>
             </div>
@@ -254,11 +259,12 @@
 
     <!-- Lightbox Modal (Pop-up) -->
     <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center lightbox transition-opacity duration-300" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white hover:text-lavender">
+        <button class="absolute top-6 right-6 text-white hover:text-lavender transition-colors p-2 bg-black/50 rounded-full">
             <i data-lucide="x" class="w-8 h-8"></i>
         </button>
         <div class="p-4 bg-card-dark rounded-xl shadow-2xl max-w-[90vw] max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
             <h3 id="lightbox-caption" class="text-lg font-serif text-white mb-3 text-center"></h3>
+            <!-- FIXED: Direct image load from click event -->
             <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-lg">
         </div>
     </div>
@@ -274,39 +280,26 @@
             else container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         }
 
-        // Lightbox Functions
-        function openLightbox(imgBaseName, caption) {
+        // --- NEW LIGHTBOX LOGIC ---
+        // Instead of guessing the filename, we pass the clicked element ('this')
+        // and grab the 'currentSrc' from the image tag inside it.
+        // This guarantees we load the image that is visibly working on the page.
+        function openLightbox(element, caption) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
             
-            // --- FIX: Logic to try JPG, then PNG ---
-            const extensions = ['.jpg', '.png', '.jpeg'];
-            let found = false;
-
-            for (const ext of extensions) {
-                const testImg = new Image();
-                testImg.onload = () => {
-                    if (!found) { // Only set source if it hasn't been set by a previous check
-                        lightboxImg.src = imgBaseName + ext;
-                        lightboxCaption.textContent = caption;
-                        lightbox.classList.add('open');
-                        document.body.style.overflow = 'hidden';
-                        found = true;
-                    }
-                };
-                testImg.onerror = () => {
-                    // Try next extension or fail gracefully
-                };
-                testImg.src = imgBaseName + ext;
-            }
-            // If the lightbox still doesn't open instantly, we force it open with the initial base guess
-            // to show the broken icon, which is better than nothing, but the loop above should find it.
-            if (!found) {
-                lightboxImg.src = imgBaseName + '.jpg'; 
+            // Find the <img> tag inside the clicked div
+            const imgElement = element.querySelector('img');
+            
+            if (imgElement && imgElement.currentSrc) {
+                // Use the source that the browser has already successfully loaded
+                lightboxImg.src = imgElement.currentSrc;
                 lightboxCaption.textContent = caption;
                 lightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            } else {
+                console.error("Could not find image source.");
             }
         }
 
