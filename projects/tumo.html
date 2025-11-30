@@ -77,17 +77,23 @@
 
     <main class="max-w-4xl mx-auto px-6 pb-20 relative z-10">
         
-        <!-- Hero Banner (Top placement as requested) -->
-        <div class="rounded-[2rem] overflow-hidden mb-12 shadow-2xl border border-[#333] relative group shadow-lavender/5 animate-slide-up hover-scale">
-            <img src="tumo_banner.png" alt="TUMO Conference Banner" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent opacity-90"></div>
-            
-            <div class="absolute bottom-8 left-8 right-8">
-                <span class="bg-lavender text-rich-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block shadow-lg shadow-lavender/20">Head Designer</span>
-                <h1 class="text-4xl md:text-6xl font-serif text-white mb-2 leading-tight drop-shadow-lg">TUMO AI/Teen Conference</h1>
-                <p class="text-lavender text-lg font-light drop-shadow-md">Jan 2025 - Mar 2025</p>
+        <!-- Hero Section (Restructured: Image separate from Text) -->
+        <section class="mb-16 animate-slide-up">
+            <!-- Banner Image -->
+            <div class="rounded-[2rem] overflow-hidden mb-8 shadow-2xl border border-[#333] relative group shadow-lavender/5 hover-scale">
+                <img src="tumo_banner.png" alt="TUMO Conference Banner" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent opacity-30"></div>
             </div>
-        </div>
+
+            <!-- Project Title & Info -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div>
+                    <span class="bg-lavender text-rich-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block shadow-lg shadow-lavender/20">Head Designer</span>
+                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-2 leading-tight">TUMO AI/Teen Conference</h1>
+                    <p class="text-lavender text-lg font-light">Jan 2025 - Mar 2025</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Role & Details -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 animate-slide-up" style="animation-delay: 0.2s;">
@@ -97,7 +103,7 @@
                     As the **Head Designer** for the TUMO International AI Conference, I led the visual branding for an event hosting 300+ attendees. My goal was to craft an identity that felt futuristic yet approachable.
                 </p>
                 <p class="text-text-secondary leading-relaxed">
-                    I designed core visual assets including digital banners, social media promotional content, and on-site display materials, ensuring brand consistency across every touchpoint.
+                    Working under a **tight schedule**, I designed core visual assets including digital banners, social media promotional content, and on-site display materials. These designs were shared with over **500 people**, ensuring brand consistency across every touchpoint.
                 </p>
             </div>
             
@@ -112,15 +118,21 @@
                     </li>
                     <li class="flex items-center gap-4 group">
                         <div class="p-2 bg-rich-black rounded-full text-lavender border border-[#333] group-hover:text-white group-hover:bg-lavender-glow transition-colors">
+                            <i data-lucide="layers" class="w-4 h-4"></i>
+                        </div>
+                        <span>10+ Designs Created</span>
+                    </li>
+                     <li class="flex items-center gap-4 group">
+                        <div class="p-2 bg-rich-black rounded-full text-lavender border border-[#333] group-hover:text-white group-hover:bg-lavender-glow transition-colors">
                             <i data-lucide="users" class="w-4 h-4"></i>
                         </div>
-                        <span>300+ Attendees</span>
+                        <span>Shared with 500+ People</span>
                     </li>
                     <li class="flex items-center gap-4 group">
                         <div class="p-2 bg-rich-black rounded-full text-lavender border border-[#333] group-hover:text-white group-hover:bg-lavender-glow transition-colors">
-                            <i data-lucide="layers" class="w-4 h-4"></i>
+                            <i data-lucide="clock" class="w-4 h-4"></i>
                         </div>
-                        <span>4 Core Assets</span>
+                        <span>Jan '25 - Mar '25</span>
                     </li>
                 </ul>
             </div>
