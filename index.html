@@ -13,26 +13,27 @@
         theme: {
           extend: {
             colors: {
-              // Updated Palette: Softer darks, slightly warmer
-              'charcoal': '#202023', // Lighter than #1a1a1a
-              'charcoal-light': '#2d2d30',
-              'lavender': '#d4b9ff',
-              'lavender-muted': '#a78bfa', // For secondary text
-              'dark-secondary': '#2a2a2a',
+              // Updated Palette: "Alive" Dark Mode
+              'rich-black': '#0f0f11',      // Deep, rich background
+              'card-dark': '#18181b',       // Slightly lighter for cards
+              'lavender': '#c4b5fd',        // Primary accent (unchanged, works well)
+              'lavender-glow': '#8b5cf6',   // Deeper purple for subtle glows
+              'text-primary': '#f3f4f6',    // High contrast text
+              'text-secondary': '#9ca3af',  // Muted text
             },
             fontFamily: {
               sans: ['Manrope', 'sans-serif'],
               serif: ['Playfair Display', 'serif'],
             },
             backgroundImage: {
-                'subtle-gradient': 'linear-gradient(to bottom right, #202023, #252529)',
+                'alive-gradient': 'radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0f11 60%)', // Subtle top glow
             }
           }
         }
       }
     </script>
     <!-- Load Google Fonts for a distinct look -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
     <!-- Load React and ReactDOM Libraries -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -43,15 +44,18 @@
     <style>
         /* Optional custom scrollbar styling for aesthetics */
         body {
-            scrollbar-color: #333 #202023;
+            scrollbar-color: #333 #0f0f11;
             scrollbar-width: thin;
         }
     </style>
 </head>
-<body class="bg-subtle-gradient min-h-screen">
+<body class="bg-rich-black text-text-primary min-h-screen relative">
+    
+    <!-- Subtle Background Glow Effect -->
+    <div class="fixed inset-0 bg-alive-gradient opacity-40 pointer-events-none z-0"></div>
 
     <!-- This is where your React component will be rendered -->
-    <div id="root"></div>
+    <div id="root" class="relative z-10"></div>
 
     <!-- MAIN REACT APPLICATION LOGIC (Consolidated from app.js) -->
     <script type="text/babel">
@@ -106,12 +110,6 @@
             </IconBase>
         );
 
-        const Instagram = (props) => (
-            <IconBase {...props}>
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-            </IconBase>
-        );
-
         const Phone = (props) => (
             <IconBase {...props}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -141,41 +139,41 @@
         const ProjectCard = ({ role, company, period, link, visual }) => (
             <a 
               href={link} 
-              className="group p-2 bg-charcoal-light hover:bg-[#333] border border-[#3a3a3a] hover:border-lavender/30 rounded-[2rem] transition-all duration-300 hover:-translate-y-1 block"
+              className="group p-1.5 bg-card-dark hover:bg-[#27272a] border border-[#333] hover:border-lavender/40 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1 block shadow-lg hover:shadow-lavender/5"
               onClick={(e) => {
                 e.preventDefault(); 
                 
                 const messageBox = document.createElement('div');
                 messageBox.className = 'fixed inset-0 flex items-center justify-center bg-black/70 z-50 animate-in fade-in duration-200';
                 messageBox.innerHTML = `
-                  <div class="bg-charcoal p-6 rounded-2xl shadow-xl border border-lavender max-w-sm text-center transform scale-100">
+                  <div class="bg-rich-black p-6 rounded-2xl shadow-2xl border border-lavender max-w-sm text-center transform scale-100">
                     <h4 class="text-xl text-white font-bold mb-3">Project Link Clicked!</h4>
-                    <p class="text-gray-300 mb-4">Simulating navigation to <strong>${link}</strong> (the project details page).</p>
-                    <p class="text-gray-400 text-sm">You need to create the file <strong>${link}</strong> in your GitHub repository to make this link functional.</p>
-                    <button onclick="this.parentNode.parentNode.remove()" class="mt-4 px-6 py-2 bg-lavender text-charcoal rounded-full font-semibold hover:bg-white transition-colors">Close</button>
+                    <p class="text-text-secondary mb-4">Simulating navigation to <strong>${link}</strong>.</p>
+                    <button onclick="this.parentNode.parentNode.remove()" class="mt-4 px-6 py-2 bg-lavender text-rich-black rounded-full font-semibold hover:bg-white transition-colors">Close</button>
                   </div>
                 `;
                 document.body.appendChild(messageBox);
               }}
             >
-              <div className="relative w-full aspect-video rounded-3xl overflow-hidden mb-4 border border-[#3a3a3a]">
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-3 border border-[#333]">
                 {/* Visual Placeholder */}
                 <img 
                   src={`https://placehold.co/400x200/2a2a2a/d4b9ff?text=${visual.replace(/\s/g, '+')}`} 
                   alt={`Visual for ${role}`} 
-                  className="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" 
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-end p-4">
-                  <span className="text-xs font-medium text-gray-300 bg-black/50 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">{period}</span>
-                  <div className="ml-auto p-2 bg-white/10 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                     <ExternalLink size={16} className="text-white" />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                
+                {/* Period Badge - Moved inside image for cleaner look */}
+                <div className="absolute bottom-3 left-3">
+                    <span className="text-[10px] font-semibold text-white bg-black/40 backdrop-blur-md px-2 py-1 rounded-full border border-white/10 uppercase tracking-wide">{period}</span>
                 </div>
               </div>
               
-              <div className="text-center p-2">
-                <h3 className="text-xl font-serif text-white mb-1 group-hover:text-lavender transition-colors">{role}</h3>
-                <p className="text-xs text-gray-500 uppercase tracking-wider">{company}</p>
+              <div className="px-2 pb-3">
+                {/* UNIFORM TYPOGRAPHY: Fixed font sizes for consistency */}
+                <h3 className="text-lg font-serif text-white mb-1 group-hover:text-lavender transition-colors line-clamp-1">{role}</h3>
+                <p className="text-xs text-text-secondary font-medium uppercase tracking-wider">{company}</p>
               </div>
             </a>
           );
@@ -203,30 +201,30 @@
             {
               role: "Head Designer",
               company: "TUMO",
-              period: "Jan 2025 - Mar 2025",
+              period: "Jan '25 - Mar '25",
               link: "projects/tumo.html", 
-              visual: "TUMO (Marketing Design)" 
+              visual: "TUMO" 
             },
             {
               role: "Content Creator Intern",
               company: "Plaksha University",
-              period: "Sep 2025 - Oct 2025",
+              period: "Sep '25 - Oct '25",
               link: "projects/plaksha.html", 
-              visual: "Plaksha (Content Creation)"
+              visual: "Plaksha"
             },
             {
-              role: "Social Media Content Creator",
+              role: "Social Media Creator",
               company: "Edtech Society",
-              period: "Oct 2024 - Mar 2025",
+              period: "Oct '24 - Mar '25",
               link: "projects/edtech.html", 
-              visual: "Edtech (Social Media Growth)"
+              visual: "Edtech"
             },
             {
-              role: "Curriculum Development Intern",
-              company: "Shikha Institute of Education",
-              period: "Oct 2024 - Nov 2024",
+              role: "Curriculum Dev Intern", // Shortened for uniformity
+              company: "Shikha Institute",
+              period: "Oct '24 - Nov '24",
               link: "projects/shikha.html", 
-              visual: "Curriculum (Design & Lesson Plans)"
+              visual: "Curriculum"
             }
           ];
 
@@ -234,76 +232,75 @@
             {
               role: "Community Outreach Lead",
               company: "Municipal Public School",
-              period: "Sep 2025 - Present",
+              period: "Sep '25 - Present",
               link: "achievements/outreach.html", 
-              visual: "Community Outreach"
+              visual: "Outreach"
             },
             {
-              role: "Documentary Production (T4E)",
-              company: "Intl. Conference",
-              period: "Nov 2024 - Mar 2025",
+              role: "Documentary Production",
+              company: "Intl. Conference (T4E)",
+              period: "Nov '24 - Mar '25",
               link: "achievements/docu.html", 
-              visual: "Documentary Production"
+              visual: "Documentary"
             },
             {
               role: "Film Opening Director",
               company: "AS Level Coursework",
-              period: "Nov 2024 - Jan 2025",
+              period: "Nov '24 - Jan '25",
               link: "achievements/film.html", 
               visual: "Filmmaking"
             },
             {
               role: "Academic Research Analyst",
               company: "IIT Bombay Mentorship",
-              period: "June 2024 - Jan 2025",
+              period: "Jun '24 - Jan '25",
               link: "achievements/research.html", 
-              visual: "Academic Research"
+              visual: "Research"
             }
           ];
 
           return (
-            <div className="min-h-screen bg-subtle-gradient text-[#e0e0e0] font-sans selection:bg-lavender selection:text-charcoal pb-20">
+            <div className="min-h-screen text-text-primary font-sans selection:bg-lavender selection:text-rich-black pb-20">
               
-              {/* Navbar - CLEANED UP: Removed Work/About/Contact Links */}
+              {/* Navbar */}
               <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center z-50 relative">
                 <div className="text-2xl font-serif font-bold tracking-tighter text-lavender">AM.</div>
-                {/* Empty div to keep the spacing or we can remove flex justification logic if strictly left aligned is wanted, keeping it flexible for future */}
                 <div></div> 
               </nav>
 
-              <main className="max-w-4xl mx-auto px-6 mt-10">
+              <main className="max-w-4xl mx-auto px-6 mt-6">
                 
                 {/* Hero Section */}
                 <section className="flex flex-col md:flex-row gap-12 items-center mb-24">
                   <div className="w-full md:w-1/2 space-y-6 order-2 md:order-1">
-                    <div className="inline-block px-4 py-1.5 rounded-full bg-charcoal-light border border-[#3a3a3a] text-xs font-medium text-lavender tracking-wide mb-2">
-                      BASED IN MUMBAI, INDIA
+                    <div className="inline-block px-4 py-1.5 rounded-full bg-card-dark border border-[#333] text-[10px] font-bold text-lavender tracking-widest uppercase mb-2">
+                      Based in Mumbai, India
                     </div>
                     {/* TYPOGRAPHY FIX: Adjusted font sizes for emphasis */}
-                    <h1 className="text-5xl md:text-6xl font-serif font-medium leading-tight text-white">
-                      Hi, I'm <span className="text-lavender italic">Aditya.</span>
+                    <h1 className="text-6xl md:text-7xl font-serif font-medium leading-none text-white tracking-tight">
+                      Hi, I'm <br/><span className="text-lavender italic">Aditya.</span>
                     </h1>
-                    <p className="text-xl md:text-2xl font-light text-lavender-muted">
-                        Graphic Designer & Storyteller.
+                    <p className="text-lg font-light text-text-secondary border-l-2 border-lavender/30 pl-4">
+                        Graphic Designer & Storyteller
                     </p>
-                    <p className="text-gray-400 text-lg leading-relaxed max-w-md mt-4">
+                    <p className="text-text-secondary text-base leading-relaxed max-w-md mt-6">
                       I blend visual aesthetics with meaningful narratives. From crafting brand identities to teaching design in underserved communities, I believe in the power of creativity to create impact.
                     </p>
                     
-                    <div className="flex gap-4 pt-4">
+                    <div className="flex gap-4 pt-6">
                       {/* FIX: Converted button to <a> tag and linked to the PDF file, including the download attribute */}
                       <a
                         href="Aditya Maurya (2).pdf" 
                         download="Aditya_Maurya_Resume.pdf"
-                        className="px-8 py-3 bg-lavender text-charcoal rounded-full font-semibold hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,185,255,0.3)]"
+                        className="px-8 py-3.5 bg-lavender text-rich-black rounded-full font-bold text-sm hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(196,181,253,0.2)]"
                       >
                         Download Resume
                       </a>
                       
-                      <a href="mailto:adi.maur7@gmail.com" className="p-3 rounded-full bg-charcoal-light text-white hover:bg-[#333] transition-colors border border-[#333]" title="Email Me">
+                      <a href="mailto:adi.maur7@gmail.com" className="p-3.5 rounded-full bg-card-dark text-white hover:bg-[#333] hover:text-lavender transition-colors border border-[#333]" title="Email Me">
                         <Mail size={20} />
                       </a>
-                      <a href="tel:+917977031905" className="p-3 rounded-full bg-charcoal-light text-white hover:bg-[#333] transition-colors border border-[#333]" title="Call Me">
+                      <a href="tel:+917977031905" className="p-3.5 rounded-full bg-card-dark text-white hover:bg-[#333] hover:text-lavender transition-colors border border-[#333]" title="Call Me">
                         <Phone size={20} />
                       </a>
                     </div>
@@ -311,14 +308,14 @@
 
                   {/* Profile Image Area */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
-                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-charcoal-light border border-[#333] shadow-2xl shadow-lavender/10 group">
+                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-card-dark border border-[#333] shadow-2xl shadow-lavender/5 group rotate-2 hover:rotate-0 transition-transform duration-700">
                        {/* FIX 1: Changed file path to profile.png */}
                        <img 
                          src="profile.png" 
                          alt="Aditya Maurya Profile" 
                          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" 
                        />
-                       <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent opacity-60"></div>
+                       <div className="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent opacity-50"></div>
                     </div>
                   </div>
                 </section>
@@ -326,24 +323,24 @@
                 {/* --- Education Section --- */}
                 <section className="mb-24">
                   <div className="flex items-center gap-4 mb-10 border-b border-[#333] pb-4">
-                    <div className="p-2 bg-charcoal-light rounded-lg text-lavender">
+                    <div className="p-2 bg-card-dark rounded-lg text-lavender">
                         <BookOpen size={24}/>
                     </div>
-                    <h2 className="text-3xl font-serif font-medium text-white">Education & Credentials</h2>
+                    <h2 className="text-3xl font-serif font-medium text-white">Education</h2>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {educationData.map((item, index) => (
-                      <div key={index} className="p-8 bg-charcoal-light border border-[#333] rounded-[2rem] hover:border-lavender/30 transition-colors">
-                        <p className="text-xs font-bold text-lavender uppercase tracking-wider mb-2">{item.school}</p>
-                        <h3 className="text-xl font-serif text-white mb-4">{item.level}</h3>
-                        <div className="space-y-3 text-gray-400 text-sm">
+                      <div key={index} className="p-8 bg-card-dark border border-[#333] rounded-[2rem] hover:border-lavender/30 transition-colors shadow-lg">
+                        <p className="text-[10px] font-bold text-lavender uppercase tracking-widest mb-3">{item.school}</p>
+                        <h3 className="text-xl font-serif text-white mb-4 leading-tight">{item.level}</h3>
+                        <div className="space-y-3 text-text-secondary text-sm">
                             <div className="flex gap-3 items-start">
-                                <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-gray-600 flex-shrink-0"></span>
+                                <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-lavender/50 flex-shrink-0"></span>
                                 <p><span className="text-gray-300 font-medium">Subjects:</span> {item.subjects}</p>
                             </div>
                             <div className="flex gap-3 items-start">
-                                <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-gray-600 flex-shrink-0"></span>
+                                <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-lavender/50 flex-shrink-0"></span>
                                  <p>{item.details}</p>
                             </div>
                         </div>
@@ -355,23 +352,23 @@
                 {/* Interactive Experience/Achievements Section */}
                 <section className="mb-32">
                   <div className="flex justify-center mb-12">
-                    <div className="p-1.5 bg-[#252525] rounded-full inline-flex border border-[#333] shadow-lg">
+                    <div className="p-1.5 bg-card-dark rounded-full inline-flex border border-[#333] shadow-xl">
                       <button 
                         onClick={() => setActiveTab('experience')}
-                        className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                        className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
                           activeTab === 'experience' 
-                            ? 'bg-lavender text-charcoal shadow-md' 
-                            : 'text-gray-400 hover:text-white'
+                            ? 'bg-lavender text-rich-black shadow-md' 
+                            : 'text-text-secondary hover:text-white'
                         }`}
                       >
-                        Past Experience
+                        Experience
                       </button>
                       <button 
                         onClick={() => setActiveTab('achievements')}
-                        className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                        className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
                           activeTab === 'achievements' 
-                            ? 'bg-lavender text-charcoal shadow-md' 
-                            : 'text-gray-400 hover:text-white'
+                            ? 'bg-lavender text-rich-black shadow-md' 
+                            : 'text-text-secondary hover:text-white'
                         }`}
                       >
                         Achievements
@@ -379,7 +376,7 @@
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {activeTab === 'experience' ? (
                       experienceData.map((item, index) => (
                         <ProjectCard key={index} {...item} />
@@ -395,42 +392,42 @@
                 {/* Footer with Contact Actions - REMOVED SOCIAL LINKS */}
                 <footer id="contact" className="py-16 border-t border-[#333] relative">
                   <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-4xl font-serif text-white mb-6">Let's create something beautiful.</h2>
-                    <p className="text-gray-400 mb-10 leading-relaxed">
+                    <h2 className="text-4xl font-serif text-white mb-6">Let's create something <span className="text-lavender italic">beautiful.</span></h2>
+                    <p className="text-text-secondary mb-10 leading-relaxed">
                       I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
                     </p>
                     
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-12">
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
                        {/* Call Action - FIXED: Removed the overlapping empty div */}
                        <a 
                          href="tel:+917977031905" 
-                         className="flex items-center gap-4 px-8 py-4 bg-charcoal-light border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
+                         className="flex items-center gap-4 px-6 py-3 bg-card-dark border border-[#333] rounded-2xl hover:bg-[#202020] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
-                         <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
-                           <Phone size={20} />
+                         <div className="p-2.5 bg-rich-black rounded-full text-lavender group-hover:bg-lavender group-hover:text-rich-black transition-colors">
+                           <Phone size={18} />
                          </div>
                          <div className="text-left">
-                           <p className="text-xs text-gray-500 uppercase tracking-wider">Call Me</p>
-                           <p className="text-white font-medium">+91 7977031905</p>
+                           <p className="text-[10px] text-text-secondary uppercase tracking-widest font-bold">Call Me</p>
+                           <p className="text-white font-medium text-sm">+91 7977031905</p>
                          </div>
                        </a>
 
                        {/* Email Action */}
                        <a 
                          href="mailto:adi.maur7@gmail.com" 
-                         className="flex items-center gap-4 px-8 py-4 bg-charcoal-light border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
+                         className="flex items-center gap-4 px-6 py-3 bg-card-dark border border-[#333] rounded-2xl hover:bg-[#202020] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
-                         <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
-                           <Mail size={20} />
+                         <div className="p-2.5 bg-rich-black rounded-full text-lavender group-hover:bg-lavender group-hover:text-rich-black transition-colors">
+                           <Mail size={18} />
                          </div>
                          <div className="text-left">
-                           <p className="text-xs text-gray-500 uppercase tracking-wider">Email Me</p>
-                           <p className="text-white font-medium">adi.maur7@gmail.com</p>
+                           <p className="text-[10px] text-text-secondary uppercase tracking-widest font-bold">Email Me</p>
+                           <p className="text-white font-medium text-sm">adi.maur7@gmail.com</p>
                          </div>
                        </a>
                     </div>
                     
-                    <div className="text-gray-600 text-xs tracking-wide">
+                    <div className="text-text-secondary text-[10px] uppercase tracking-widest opacity-50">
                       © 2025 Aditya Maurya. All Rights Reserved.
                     </div>
                   </div>
