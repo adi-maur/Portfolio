@@ -13,14 +13,20 @@
         theme: {
           extend: {
             colors: {
-              'charcoal': '#1a1a1a',
+              // Updated Palette: Softer darks, slightly warmer
+              'charcoal': '#202023', // Lighter than #1a1a1a
+              'charcoal-light': '#2d2d30',
               'lavender': '#d4b9ff',
-              'dark-secondary': '#222',
+              'lavender-muted': '#a78bfa', // For secondary text
+              'dark-secondary': '#2a2a2a',
             },
             fontFamily: {
               sans: ['Manrope', 'sans-serif'],
               serif: ['Playfair Display', 'serif'],
             },
+            backgroundImage: {
+                'subtle-gradient': 'linear-gradient(to bottom right, #202023, #252529)',
+            }
           }
         }
       }
@@ -37,12 +43,12 @@
     <style>
         /* Optional custom scrollbar styling for aesthetics */
         body {
-            scrollbar-color: #333 #1a1a1a;
+            scrollbar-color: #333 #202023;
             scrollbar-width: thin;
         }
     </style>
 </head>
-<body class="bg-charcoal">
+<body class="bg-subtle-gradient min-h-screen">
 
     <!-- This is where your React component will be rendered -->
     <div id="root"></div>
@@ -135,7 +141,7 @@
         const ProjectCard = ({ role, company, period, link, visual }) => (
             <a 
               href={link} 
-              className="group p-2 bg-[#222] hover:bg-[#2a2a2a] border border-[#333] hover:border-lavender/30 rounded-[2rem] transition-all duration-300 hover:-translate-y-1 block"
+              className="group p-2 bg-charcoal-light hover:bg-[#333] border border-[#3a3a3a] hover:border-lavender/30 rounded-[2rem] transition-all duration-300 hover:-translate-y-1 block"
               onClick={(e) => {
                 e.preventDefault(); 
                 
@@ -256,16 +262,13 @@
           ];
 
           return (
-            <div className="min-h-screen bg-charcoal text-[#e0e0e0] font-sans selection:bg-lavender selection:text-charcoal pb-20">
+            <div className="min-h-screen bg-subtle-gradient text-[#e0e0e0] font-sans selection:bg-lavender selection:text-charcoal pb-20">
               
-              {/* Navbar */}
+              {/* Navbar - CLEANED UP: Removed Work/About/Contact Links */}
               <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center z-50 relative">
                 <div className="text-2xl font-serif font-bold tracking-tighter text-lavender">AM.</div>
-                <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-                  <a href="#" className="hover:text-white transition-colors">Work</a>
-                  <a href="#" className="hover:text-white transition-colors">About</a>
-                  <a href="#contact" className="hover:text-white transition-colors">Contact</a>
-                </div>
+                {/* Empty div to keep the spacing or we can remove flex justification logic if strictly left aligned is wanted, keeping it flexible for future */}
+                <div></div> 
               </nav>
 
               <main className="max-w-4xl mx-auto px-6 mt-10">
@@ -273,14 +276,17 @@
                 {/* Hero Section */}
                 <section className="flex flex-col md:flex-row gap-12 items-center mb-24">
                   <div className="w-full md:w-1/2 space-y-6 order-2 md:order-1">
-                    <div className="inline-block px-4 py-1.5 rounded-full bg-[#2a2a2a] border border-[#3a3a3a] text-xs font-medium text-lavender tracking-wide mb-2">
+                    <div className="inline-block px-4 py-1.5 rounded-full bg-charcoal-light border border-[#3a3a3a] text-xs font-medium text-lavender tracking-wide mb-2">
                       BASED IN MUMBAI, INDIA
                     </div>
+                    {/* TYPOGRAPHY FIX: Adjusted font sizes for emphasis */}
                     <h1 className="text-5xl md:text-6xl font-serif font-medium leading-tight text-white">
-                      Hi, I'm <span className="text-lavender italic">Aditya.</span> <br/>
-                      Graphic Designer & Storyteller.
+                      Hi, I'm <span className="text-lavender italic">Aditya.</span>
                     </h1>
-                    <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+                    <p className="text-xl md:text-2xl font-light text-lavender-muted">
+                        Graphic Designer & Storyteller.
+                    </p>
+                    <p className="text-gray-400 text-lg leading-relaxed max-w-md mt-4">
                       I blend visual aesthetics with meaningful narratives. From crafting brand identities to teaching design in underserved communities, I believe in the power of creativity to create impact.
                     </p>
                     
@@ -294,10 +300,10 @@
                         Download Resume
                       </a>
                       
-                      <a href="mailto:adi.maur7@gmail.com" className="p-3 rounded-full bg-[#2a2a2a] text-white hover:bg-[#333] transition-colors border border-[#333]" title="Email Me">
+                      <a href="mailto:adi.maur7@gmail.com" className="p-3 rounded-full bg-charcoal-light text-white hover:bg-[#333] transition-colors border border-[#333]" title="Email Me">
                         <Mail size={20} />
                       </a>
-                      <a href="tel:+917977031905" className="p-3 rounded-full bg-[#2a2a2a] text-white hover:bg-[#333] transition-colors border border-[#333]" title="Call Me">
+                      <a href="tel:+917977031905" className="p-3 rounded-full bg-charcoal-light text-white hover:bg-[#333] transition-colors border border-[#333]" title="Call Me">
                         <Phone size={20} />
                       </a>
                     </div>
@@ -305,7 +311,7 @@
 
                   {/* Profile Image Area */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
-                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-[#222] border border-[#333] shadow-2xl shadow-lavender/10 group">
+                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-charcoal-light border border-[#333] shadow-2xl shadow-lavender/10 group">
                        {/* FIX 1: Changed file path to profile.png */}
                        <img 
                          src="profile.png" 
@@ -320,7 +326,7 @@
                 {/* --- Education Section --- */}
                 <section className="mb-24">
                   <div className="flex items-center gap-4 mb-10 border-b border-[#333] pb-4">
-                    <div className="p-2 bg-[#2a2a2a] rounded-lg text-lavender">
+                    <div className="p-2 bg-charcoal-light rounded-lg text-lavender">
                         <BookOpen size={24}/>
                     </div>
                     <h2 className="text-3xl font-serif font-medium text-white">Education & Credentials</h2>
@@ -328,7 +334,7 @@
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {educationData.map((item, index) => (
-                      <div key={index} className="p-8 bg-dark-secondary border border-[#333] rounded-[2rem] hover:border-lavender/30 transition-colors">
+                      <div key={index} className="p-8 bg-charcoal-light border border-[#333] rounded-[2rem] hover:border-lavender/30 transition-colors">
                         <p className="text-xs font-bold text-lavender uppercase tracking-wider mb-2">{item.school}</p>
                         <h3 className="text-xl font-serif text-white mb-4">{item.level}</h3>
                         <div className="space-y-3 text-gray-400 text-sm">
@@ -386,7 +392,7 @@
                   </div>
                 </section>
 
-                {/* Footer with Contact Actions */}
+                {/* Footer with Contact Actions - REMOVED SOCIAL LINKS */}
                 <footer id="contact" className="py-16 border-t border-[#333] relative">
                   <div className="max-w-2xl mx-auto text-center">
                     <h2 className="text-4xl font-serif text-white mb-6">Let's create something beautiful.</h2>
@@ -395,10 +401,10 @@
                     </p>
                     
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-12">
-                       {/* Call Action */}
+                       {/* Call Action - FIXED: Removed the overlapping empty div */}
                        <a 
                          href="tel:+917977031905" 
-                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
+                         className="flex items-center gap-4 px-8 py-4 bg-charcoal-light border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
                          <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
                            <Phone size={20} />
@@ -412,7 +418,7 @@
                        {/* Email Action */}
                        <a 
                          href="mailto:adi.maur7@gmail.com" 
-                         className="flex items-center gap-4 px-8 py-4 bg-dark-secondary border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
+                         className="flex items-center gap-4 px-8 py-4 bg-charcoal-light border border-[#333] rounded-2xl hover:bg-[#2a2a2a] hover:border-lavender transition-all group w-full sm:w-auto relative"
                        >
                          <div className="p-3 bg-charcoal rounded-full text-lavender group-hover:bg-lavender group-hover:text-charcoal transition-colors">
                            <Mail size={20} />
@@ -422,12 +428,6 @@
                            <p className="text-white font-medium">adi.maur7@gmail.com</p>
                          </div>
                        </a>
-                    </div>
-
-                    <div className="flex justify-center gap-8 mb-8">
-                        <a href="#" className="text-gray-500 hover:text-lavender transition-colors text-sm">LinkedIn</a>
-                        <a href="#" className="text-gray-500 hover:text-lavender transition-colors text-sm">Instagram</a>
-                        <a href="#" className="text-gray-500 hover:text-lavender transition-colors text-sm">Behance</a>
                     </div>
                     
                     <div className="text-gray-600 text-xs tracking-wide">
