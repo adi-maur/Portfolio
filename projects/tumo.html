@@ -25,6 +25,20 @@
             },
             backgroundImage: {
                 'alive-gradient': 'radial-gradient(circle at 50% 0%, #2e1065 0%, #0f0f11 60%)',
+            },
+            animation: {
+                'fade-in': 'fadeIn 1s ease-out forwards',
+                'slide-up': 'slideUp 0.8s ease-out forwards',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                slideUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
             }
           }
         }
@@ -44,9 +58,9 @@
         .hover-scale img { transition: transform 0.5s ease; }
         .hover-scale:hover img { transform: scale(1.03); }
         
-        /* Lightbox Fade In */
-        .lightbox-open { opacity: 1; pointer-events: auto; }
-        .lightbox-closed { opacity: 0; pointer-events: none; }
+        /* Lightbox Fade In/Out */
+        .lightbox { visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+        .lightbox.open { visibility: visible; opacity: 1; }
     </style>
 </head>
 <body class="bg-rich-black text-text-primary min-h-screen relative overflow-x-hidden">
@@ -67,15 +81,17 @@
         
         <!-- Hero Section: Image Separate from Text -->
         <section class="mb-16">
-            <!-- 1. The Banner Image (Clean, No Text Overlap) -->
+            <!-- 1. The Banner Image (Clean Header) -->
             <div class="rounded-[2rem] overflow-hidden mb-8 shadow-2xl border border-[#333] hover-scale relative group">
                 <img src="tumo_banner.png" 
                      onerror="this.onerror=null; this.src='tumo_banner.jpg';" 
                      alt="TUMO Conference Banner" 
                      class="w-full h-auto object-cover shadow-lavender/5">
+                <!-- Added a subtle bottom fade to blend with the background -->
+                <div class="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent opacity-30"></div>
             </div>
 
-            <!-- 2. The Text Details (Below the Image) -->
+            <!-- 2. The Text Details (Below the Image, Cleanly Separated) -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-[#333] pb-8">
                 <div>
                     <span class="bg-lavender text-rich-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3 inline-block">Head Designer</span>
@@ -90,7 +106,7 @@
             <div class="md:col-span-2 space-y-6">
                 <h2 class="text-3xl font-serif text-white">My Role</h2>
                 <p class="text-text-secondary leading-relaxed text-lg font-light">
-                    As the <strong>Head Designer</strong> for the TUMO International AI Conference, I led the visual branding for an event hosting 300+ attendees.
+                    As the <strong>Head Designer</strong> for the TUMO International AI Conference, I led the visual branding for an event hosting 300+ attendees. My goal was to craft an identity that felt futuristic yet approachable.
                 </p>
                 <p class="text-text-secondary leading-relaxed">
                     Working under a <strong>tight schedule</strong>, I designed core visual assets including digital banners, social media promotional content, and on-site display materials. These designs were shared with over <strong>500 people</strong>, ensuring brand consistency across every touchpoint.
@@ -112,6 +128,10 @@
                         <i data-lucide="users" class="text-lavender w-5 h-5"></i>
                         <span>Shared with 500+ People</span>
                     </li>
+                    <li class="flex items-center gap-4">
+                        <i data-lucide="clock" class="text-lavender w-5 h-5"></i>
+                        <span>Jan 2025 - Mar 2025</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -124,7 +144,7 @@
                         <i data-lucide="sparkles" class="w-3 h-3"></i> Designed by Me
                     </div>
                     <h2 class="text-3xl font-serif text-white">Selected Works</h2>
-                    <p class="text-xs text-text-secondary mt-2">Click any image to enlarge</p>
+                    <p class="text-xs text-text-secondary mt-2">Click any image to enlarge and view details.</p>
                 </div>
                 
                 <!-- Navigation Buttons -->
@@ -142,42 +162,49 @@
             <div id="gallery" class="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 px-1 scroll-smooth">
                 
                 <!-- Work Item 1 -->
-                <div class="min-w-[85%] md:min-w-[60%] snap-center hover-scale cursor-pointer" onclick="openLightbox('tumo_work_1.jpg')">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
+                     onclick="openLightbox('tumo_work_1.jpg', 'Speakers Lineup')">
                     <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video">
                         <img src="tumo_work_1.jpg" onerror="this.onerror=null; this.src='tumo_work_1.png';" class="w-full h-full object-cover">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest">Speakers Lineup</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Speakers Lineup</p>
                 </div>
 
                 <!-- Work Item 2 -->
-                <div class="min-w-[85%] md:min-w-[60%] snap-center hover-scale cursor-pointer" onclick="openLightbox('tumo_work_2.jpg')">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
+                     onclick="openLightbox('tumo_work_2.jpg', 'Teen Speakers Display')">
                     <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-video">
                         <img src="tumo_work_2.jpg" onerror="this.onerror=null; this.src='tumo_work_2.png';" class="w-full h-full object-cover">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest">Teen Speakers</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Teen Speakers</p>
                 </div>
 
                 <!-- Work Item 3 -->
-                <div class="min-w-[85%] md:min-w-[60%] snap-center hover-scale cursor-pointer" onclick="openLightbox('tumo_work_3.jpg')">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
+                     onclick="openLightbox('tumo_work_3.jpg', 'Workshop Poster')">
                     <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50">
                         <img src="tumo_work_3.jpg" onerror="this.onerror=null; this.src='tumo_work_3.png';" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest">Workshop Poster</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Workshop Poster</p>
                 </div>
 
                 <!-- Work Item 4 -->
-                <div class="min-w-[85%] md:min-w-[60%] snap-center hover-scale cursor-pointer" onclick="openLightbox('tumo_work_4.jpg')">
+                <div class="min-w-[85%] md:min-w-[45%] snap-center hover-scale cursor-pointer" 
+                     onclick="openLightbox('tumo_work_4.jpg', 'Competition Flyer')">
                     <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl relative aspect-square md:aspect-video bg-black/50">
                         <img src="tumo_work_4.jpg" onerror="this.onerror=null; this.src='tumo_work_4.png';" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest">Competition Flyer</p>
+                    <p class="text-sm text-text-secondary mt-4 text-center uppercase tracking-widest font-medium">Competition Flyer</p>
                 </div>
 
             </div>
         </section>
 
         <!-- Hosting Spotlight -->
-        <section class="bg-card-dark rounded-[2.5rem] p-8 md:p-12 border border-[#333] flex flex-col md:flex-row gap-12 items-center relative overflow-hidden">
+        <section class="bg-card-dark rounded-[2.5rem] p-8 md:p-12 border border-[#333] flex flex-col md:flex-row gap-12 items-center relative overflow-hidden group hover:border-lavender/30 transition-colors">
+            <!-- Glow Effect -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-lavender/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-lavender/10 transition-colors duration-700"></div>
+
             <div class="w-full md:w-1/2 space-y-6 relative z-10">
                 <div class="inline-block px-4 py-1.5 bg-lavender text-rich-black text-xs font-bold rounded-full uppercase tracking-wider">
                     Beyond Design
@@ -191,7 +218,7 @@
             </div>
             
             <div class="w-full md:w-1/2 relative">
-                <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700 ease-out">
+                <div class="rounded-[2rem] overflow-hidden border border-[#333] shadow-2xl rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-out">
                     <img src="tumo_host.jpg" onerror="this.onerror=null; this.src='tumo_host.png';" class="w-full h-auto object-cover">
                 </div>
             </div>
@@ -200,9 +227,9 @@
         <!-- Unique Footer Contact -->
         <footer id="contact" class="py-16 border-t border-[#333] relative">
             <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-serif text-white mb-6">Like what you see?</h2>
+            <h2 class="text-3xl font-serif text-white mb-6">Ready to collaborate?</h2>
             <p class="text-text-secondary mb-10 leading-relaxed">
-                I'm available for design projects and collaborations. Let's chat about how I can help bring your next event to life.
+                Let's discuss how my design and communication skills can elevate your next project.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
@@ -226,11 +253,14 @@
     </main>
 
     <!-- Lightbox Modal (Pop-up) -->
-    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center lightbox-closed transition-opacity duration-300" onclick="closeLightbox()">
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center lightbox transition-opacity duration-300" onclick="closeLightbox()">
         <button class="absolute top-6 right-6 text-white hover:text-lavender">
             <i data-lucide="x" class="w-8 h-8"></i>
         </button>
-        <img id="lightbox-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-[#333]">
+        <div class="p-4 bg-card-dark rounded-xl shadow-2xl max-w-[90vw] max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+            <h3 id="lightbox-caption" class="text-lg font-serif text-white mb-3 text-center"></h3>
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-lg">
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -245,23 +275,45 @@
         }
 
         // Lightbox Functions
-        function openLightbox(imgSrc) {
+        function openLightbox(imgBaseName, caption) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
             
-            // Try loading JPG first, fallback handled by onerror in the HTML doesn't apply to dynamic JS source easily without pre-check,
-            // so we assume the click passed the correct working source, OR we just set it.
-            // Since the onclick passes the filename string, let's just use that.
-            lightboxImg.src = imgSrc;
-            
-            lightbox.classList.remove('lightbox-closed');
-            lightbox.classList.add('lightbox-open');
+            // --- FIX: Logic to try JPG, then PNG ---
+            const extensions = ['.jpg', '.png', '.jpeg'];
+            let found = false;
+
+            for (const ext of extensions) {
+                const testImg = new Image();
+                testImg.onload = () => {
+                    if (!found) { // Only set source if it hasn't been set by a previous check
+                        lightboxImg.src = imgBaseName + ext;
+                        lightboxCaption.textContent = caption;
+                        lightbox.classList.add('open');
+                        document.body.style.overflow = 'hidden';
+                        found = true;
+                    }
+                };
+                testImg.onerror = () => {
+                    // Try next extension or fail gracefully
+                };
+                testImg.src = imgBaseName + ext;
+            }
+            // If the lightbox still doesn't open instantly, we force it open with the initial base guess
+            // to show the broken icon, which is better than nothing, but the loop above should find it.
+            if (!found) {
+                lightboxImg.src = imgBaseName + '.jpg'; 
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('lightbox-open');
-            lightbox.classList.add('lightbox-closed');
+            lightbox.classList.remove('open');
+            document.body.style.overflow = 'auto';
             setTimeout(() => { document.getElementById('lightbox-img').src = ''; }, 300);
         }
     </script>
