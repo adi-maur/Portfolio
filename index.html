@@ -54,6 +54,9 @@
     <!-- Load Babel for JSX support in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         body { scrollbar-color: #333 #0f0f11; scrollbar-width: thin; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -90,41 +93,37 @@
     <!-- MAIN REACT APPLICATION LOGIC -->
     <script type="text/babel">
         const { useState } = React;
+        const { Mail, Phone, BookOpen, ExternalLink, PenTool, Layers, Users, Clock, ArrowLeft, ChevronDown } = lucide;
 
-        // --- ICONS ---
-        const IconBase = ({ children, size = 24, ...props }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>{children}</svg>
-        );
-        const Mail = (props) => <IconBase {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconBase>;
-        const Phone = (props) => <IconBase {...props}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></IconBase>;
-        const ChevronDown = (props) => <IconBase {...props}><path d="m6 9 6 6 6-6"/></IconBase>;
-        const BookOpen = (props) => ( <IconBase {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></IconBase> );
-        const ExternalLink = (props) => ( <IconBase {...props}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></IconBase> );
-
-        // --- PROJECT CARD ---
+        // --- PROJECT CARD COMPONENT (FIXED: Text Title instead of Image) ---
         const ProjectCard = ({ role, company, period, link, visual }) => {
-            const imgSrc = visual + '.jpg'; // Assuming JPG is primary
             return (
                 <a 
                     href={link} 
                     className="group p-2 bg-card-dark hover:bg-[#202020] border border-[#333] hover:border-lavender-glow/30 rounded-[2rem] transition-all duration-300 hover:-translate-y-1 block shadow-lg hover:shadow-xl hover:shadow-lavender-glow/10"
                 >
-                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden mb-4 border border-[#3a3a3a]">
+                    {/* Card Header Area (Replaced Image with Text Title) */}
+                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden mb-4 border border-[#3a3a3a] bg-rich-black flex items-center justify-center group-hover:border-lavender/20 transition-colors">
                         
-                        <img 
-                            src={imgSrc} 
-                            onError={(e) => { e.target.onerror = null; e.target.src = visual + '.png'; }} // Fallback to PNG
-                            alt={`Visual for ${role}`} 
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        />
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-end p-4">
-                            <span className="text-xs font-medium text-gray-300 bg-black/50 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">{period}</span>
-                            <div className="ml-auto p-2 bg-white/10 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 text-lavender">
-                                <ExternalLink size={16} />
-                            </div>
+                        {/* Large Title Text */}
+                        <h3 className="text-4xl md:text-5xl font-serif font-bold text-[#2a2a2a] group-hover:text-lavender/20 transition-colors duration-500 select-none">
+                            {visual}
+                        </h3>
+
+                        {/* Period Badge (Bottom Left) */}
+                        <div className="absolute bottom-4 left-4 z-10">
+                            <span className="text-[10px] font-semibold text-white bg-card-dark/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 uppercase tracking-wide shadow-sm">
+                                {period}
+                            </span>
+                        </div>
+
+                        {/* External Link Icon (Bottom Right) */}
+                        <div className="absolute bottom-4 right-4 p-2 bg-white/5 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 text-lavender border border-white/10">
+                             <ExternalLink size={16} />
                         </div>
                     </div>
                     
+                    {/* Card Details */}
                     <div className="text-center p-2">
                         <h3 className="text-xl font-serif text-white mb-1 group-hover:text-lavender transition-colors">{role}</h3>
                         <p className="text-xs text-gray-500 uppercase tracking-wider">{company}</p>
@@ -152,35 +151,35 @@
             }
           ];
 
-          // --- Experience Data (Plaksha time changed to Sep 25 - Nov 25) ---
+          // --- Experience Data ---
           const experienceData = [
             {
               role: "Head Designer",
               company: "TUMO",
               period: "Jan '25 - Mar '25",
               link: "projects/tumo.html",
-              visual: "tumo_work_1" // Placeholder name for image thumbnail
+              visual: "TUMO" // This text will now appear large in the box
             },
             {
               role: "Content Creator Intern",
               company: "Plaksha University",
-              period: "Sep '25 - Nov '25", // UPDATED PERIOD
+              period: "Sep '25 - Nov '25", 
               link: "#plaksha-project",
-              visual: "plaksha_work"
+              visual: "Plaksha"
             },
             {
-              role: "Social Media Content Creator",
+              role: "Social Media Creator",
               company: "Edtech Society",
               period: "Oct '24 - Mar '25",
               link: "#edtech-project",
-              visual: "edtech_work"
+              visual: "Edtech"
             },
             {
-              role: "Curriculum Development Intern",
-              company: "Shikha Institute of Education",
+              role: "Curriculum Dev Intern",
+              company: "Shikha Institute",
               period: "Oct '24 - Nov '24",
               link: "#shikha-project",
-              visual: "curriculum_work"
+              visual: "Curriculum"
             }
           ];
 
@@ -191,28 +190,28 @@
               company: "Municipal Public School",
               period: "Sep '25 - Present",
               link: "#outreach-project",
-              visual: "outreach_work"
+              visual: "Outreach"
             },
             {
-              role: "Documentary Production (T4E)",
+              role: "Documentary Production",
               company: "Intl. Conference",
               period: "Nov '24 - Mar '25",
               link: "#docu-project",
-              visual: "docu_work"
+              visual: "Documentary"
             },
             {
               role: "Film Opening Director",
               company: "AS Level Coursework",
               period: "Nov '24 - Jan '25",
               link: "#film-project",
-              visual: "film_work"
+              visual: "Filmmaking"
             },
             {
               role: "Academic Research Analyst",
               company: "IIT Bombay Mentorship",
               period: "June '24 - Jan '25",
               link: "#research-project",
-              visual: "research_work"
+              visual: "Research"
             }
           ];
 
@@ -234,7 +233,7 @@
                     {/* Past Experience Dropdown */}
                     <div className="relative dropdown-group">
                         <button className="text-text-secondary hover:text-lavender-glow transition-colors flex items-center gap-1">
-                            Past Experience <ChevronDown className="w-4 h-4" />
+                            Past Experience <ChevronDown size={16} />
                         </button>
                         {/* Dropdown Menu */}
                         <div className="absolute right-0 mt-2 w-52 bg-card-dark border border-[#333] rounded-xl shadow-xl dropdown-menu z-50">
@@ -282,7 +281,7 @@
 
                   {/* Profile Image Area */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
-                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-card-dark border border-[#333] shadow-2xl shadow-lavender/10 group ring-1 ring-white/10 hover:ring-lavender-glow/50 transition-all duration-500">
+                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-card-dark border border-[#333] shadow-2xl shadow-lavender/10 group ring-1 ring-white/10 hover:ring-lavender-glow/50 transition-all duration-500 rotate-2 hover:rotate-0">
                        <img 
                          src="profile.png" 
                          alt="Aditya Maurya Profile" 
