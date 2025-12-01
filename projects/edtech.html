@@ -117,9 +117,11 @@
 
         <!-- Main Banner Display -->
         <section class="mb-24 animate-slide-up" style="animation-delay: 0.1s;">
-            <div class="rounded-3xl overflow-hidden border border-[#333] shadow-2xl relative aspect-[21/9] group hover-levitate"> <!-- Added hover-levitate -->
-                <img src="t4e website.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="T4E Website Banner">
-                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            <!-- FIX: Container uses flex to center, and w-fit to wrap content. Removed fixed width/height constraints -->
+            <div class="rounded-3xl overflow-hidden border border-[#333] shadow-2xl relative w-fit mx-auto group hover-levitate flex justify-center"> 
+                <!-- FIX: Removed w-full. Use max-w-full to ensure responsiveness but keep original size. -->
+                <img src="t4e website.png" class="max-w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" alt="T4E Website Banner">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors pointer-events-none"></div>
             </div>
             <p class="text-center text-sm text-text-secondary mt-4 font-mono">Official Website Banner designed for the T4E Conference.</p>
         </section>
@@ -128,7 +130,7 @@
         <section class="mb-32 animate-slide-up" style="animation-delay: 0.2s;">
             <div class="flex items-center gap-4 mb-8">
                 <div class="p-3 bg-card-dark border border-[#333] rounded-full text-lavender group hover:bg-lavender hover:text-rich-black transition-all duration-300">
-                    <i data-lucide="sparkles" class="w-6 h-6 group-hover:animate-spin"></i> <!-- Spin on hover -->
+                    <i data-lucide="sparkles" class="w-6 h-6 group-hover:animate-spin"></i>
                 </div>
                 <h2 class="text-4xl font-serif text-white">Edtech Society <span class="italic text-lavender">Wrapped</span></h2>
             </div>
@@ -137,8 +139,7 @@
             </p>
 
             <!-- PPT Download / View Container -->
-            <div class="rounded-[2.5rem] border border-[#333] bg-card-dark p-8 md:p-12 relative overflow-hidden group hover:border-lavender-glow/50 transition-colors duration-500"> <!-- Glow border on hover -->
-                <!-- Decorative Glow -->
+            <div class="rounded-[2.5rem] border border-[#333] bg-card-dark p-8 md:p-12 relative overflow-hidden group hover:border-lavender-glow/50 transition-colors duration-500">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-lavender/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-80"></div>
                 <div class="absolute bottom-0 left-0 w-64 h-64 bg-wrapped-green/20 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-80"></div>
 
@@ -155,16 +156,13 @@
                             View the complete slide deck detailing the community's 440+ members, 11 masterclasses, and top genres of the year.
                         </p>
                         
-                        <!-- Download/View Button with enhanced hover -->
                         <a href="Et Society Wrapped.pptx" download class="inline-flex items-center gap-3 px-8 py-4 bg-white text-rich-black rounded-full font-bold hover:bg-lavender hover:text-black transition-all transform hover:scale-110 hover:-translate-y-1 shadow-xl hover:shadow-lavender/40 active:scale-95">
                             <i data-lucide="download" class="w-5 h-5"></i>
                             Download PPT Presentation
                         </a>
                     </div>
 
-                    <!-- Visual Representation of the PPT (Mockup) -->
                     <div class="w-full md:w-2/3 grid grid-cols-2 gap-4 opacity-90 group-hover:opacity-100 transition-opacity">
-                        <!-- Cards with hover lift -->
                         <div class="aspect-video bg-[#222] rounded-xl border border-[#333] p-4 flex flex-col justify-center items-center text-center transform -rotate-2 group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-edtech-yellow/20 group-hover:border-edtech-yellow/50 transition-all duration-500 shadow-2xl">
                             <span class="text-edtech-yellow text-4xl font-bold mb-2">440</span>
                             <span class="text-gray-400 text-xs uppercase tracking-widest">Active Members</span>
@@ -191,8 +189,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <!-- Instagram Post 1 -->
-                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] aspect-square md:aspect-[4/5] bg-card-dark hover-levitate cursor-pointer"> <!-- Added hover-levitate -->
-                    <img src="featured member.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Featured Member Post">
+                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] bg-card-dark hover-levitate cursor-pointer"> 
+                    <img src="featured member.png" class="w-full h-auto block transition-transform duration-700 group-hover:scale-105" alt="Featured Member Post">
                     <div class="absolute inset-0 bg-gradient-to-t from-rich-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
                         <span class="text-lavender font-bold tracking-wider text-sm mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">INSTAGRAM</span>
                         <h3 class="text-2xl font-serif text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">Community Spotlight</h3>
@@ -200,8 +198,8 @@
                 </div>
 
                 <!-- Instagram Post 2 -->
-                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] aspect-square md:aspect-[4/5] bg-card-dark hover-levitate cursor-pointer"> <!-- Added hover-levitate -->
-                    <img src="Untitled (Instagram Post).jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Tech for Inclusive Education">
+                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] bg-card-dark hover-levitate cursor-pointer"> 
+                    <img src="Untitled (Instagram Post).jpg" class="w-full h-auto block transition-transform duration-700 group-hover:scale-105" alt="Tech for Inclusive Education">
                     <div class="absolute inset-0 bg-gradient-to-t from-rich-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
                         <span class="text-lavender font-bold tracking-wider text-sm mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">INSTAGRAM</span>
                         <h3 class="text-2xl font-serif text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">Inclusive Tech</h3>
@@ -221,30 +219,46 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- FIX: Grid with items-start to allow variable height -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                 <!-- Video 1 -->
-                <div class="rounded-[2rem] border border-[#333] bg-black overflow-hidden relative shadow-2xl hover-levitate"> <!-- Added hover-levitate -->
-                    <video controls class="w-full h-auto aspect-video object-cover" poster="https://placehold.co/600x400/111/333?text=Video+Loading...">
+                <div class="rounded-[2rem] border border-[#333] bg-black relative shadow-2xl hover-levitate"> 
+                    <!-- FIX: Removed overflow-hidden to prevent control clipping. Removed fixed height/aspect. -->
+                    <video controls class="w-full h-auto block rounded-t-[2rem]" style="object-fit: contain;" poster="https://placehold.co/600x400/111/333?text=Teaser+Loading...">
                         <source src="4th.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="p-6 bg-card-dark border-t border-[#333] group hover:bg-[#202020] transition-colors">
+                    <div class="p-6 bg-card-dark border-t border-[#333] rounded-b-[2rem] group hover:bg-[#202020] transition-colors">
                         <h3 class="text-xl font-serif text-white group-hover:text-lavender transition-colors">4th Edition Teaser</h3>
                         <p class="text-sm text-text-secondary mt-1">Short-form teaser content for the annual event.</p>
                     </div>
                 </div>
 
                 <!-- Video 2 -->
-                <div class="rounded-[2rem] border border-[#333] bg-black overflow-hidden relative shadow-2xl hover-levitate"> <!-- Added hover-levitate -->
-                    <video controls class="w-full h-auto aspect-video object-cover" poster="https://placehold.co/600x400/111/333?text=Video+Loading...">
+                <div class="rounded-[2rem] border border-[#333] bg-black relative shadow-2xl hover-levitate"> 
+                    <video controls class="w-full h-auto block rounded-t-[2rem]" style="object-fit: contain;" poster="https://placehold.co/600x400/111/333?text=Location+Loading...">
                         <source src="T4E Location.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="p-6 bg-card-dark border-t border-[#333] group hover:bg-[#202020] transition-colors">
+                    <div class="p-6 bg-card-dark border-t border-[#333] rounded-b-[2rem] group hover:bg-[#202020] transition-colors">
                         <h3 class="text-xl font-serif text-white group-hover:text-lavender transition-colors">Location Reveal</h3>
                         <p class="text-sm text-text-secondary mt-1">Showcasing the venue at IIT Gandhinagar.</p>
                     </div>
                 </div>
+
+                <!-- Video 3: UPDATED INFO -->
+                <div class="rounded-[2rem] border border-[#333] bg-black relative shadow-2xl hover-levitate"> 
+                    <video controls class="w-full h-auto block rounded-t-[2rem]" style="object-fit: contain;" poster="https://placehold.co/600x400/111/333?text=Invite+Loading...">
+                        <source src="T4E is here! Join us at IIT Gandhinagar..mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="p-6 bg-card-dark border-t border-[#333] rounded-b-[2rem] group hover:bg-[#202020] transition-colors">
+                        <!-- FIX: Corrected Title and Removed Name -->
+                        <h3 class="text-xl font-serif text-white group-hover:text-lavender transition-colors">Invitation</h3>
+                        <p class="text-sm text-text-secondary mt-1">Join us at IIT Gandhinagar.</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
