@@ -197,14 +197,15 @@
                             <img src="webinar_2.png" class="w-full h-full object-cover">
                         </div>
                     </div>
+                    <!-- Updated: Fallback to .jpg for webinar 3 and 4 in case the files are misnamed -->
                     <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_3.png', 'Water Security', 'square')">
                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
-                            <img src="webinar_3.png" class="w-full h-full object-cover">
+                            <img src="webinar_3.png" onerror="this.onerror=null;this.src='webinar_3.jpg';" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_4.png', 'Ask Me Anything', 'square')">
                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
-                            <img src="webinar_4.png" class="w-full h-full object-cover">
+                            <img src="webinar_4.png" onerror="this.onerror=null;this.src='webinar_4.jpg';" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -261,6 +262,13 @@
             featuredImg.style.opacity = '0';
             setTimeout(() => {
                 featuredImg.src = imageSrc;
+                // Add fallback to jpg if main png fails to load (covers both cases)
+                featuredImg.onerror = function() {
+                    if (this.src.endsWith('.png')) {
+                        this.src = this.src.replace('.png', '.jpg');
+                    }
+                };
+                
                 featuredCaption.innerText = captionText;
                 featuredImg.style.opacity = '1';
             }, 200);
@@ -331,7 +339,6 @@
                     aspectToUse = 'wide';
                 }
 
-                // Use the src directly, no placeholder fallback
                 updateFeatured(firstVisibleItem, src, defaultCaption, aspectToUse);
             }
             document.getElementById('thumbnail-strip').scrollLeft = 0;
