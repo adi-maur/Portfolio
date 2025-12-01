@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaksha University | Content Creator</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'rich-black': '#0f0f11',
+              'card-dark': '#18181b',
+              'lavender': '#c4b5fd',
+              'lavender-glow': '#8b5cf6',
+              'text-primary': '#f3f4f6',
+              'text-secondary': '#9ca3af',
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.8s ease-out forwards',
+                'slide-up': 'slideUp 0.8s ease-out forwards',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                slideUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { scrollbar-color: #333 #0f0f11; scrollbar-width: thin; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .thumb-active { border-color: #c4b5fd !important; opacity: 1 !important; transform: scale(1.05); }
+        
+        /* Hover Elevate Animation */
+        .gallery-thumb { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            opacity: 0.7; 
+            border: 2px solid transparent; 
+        }
+        .thumb-container:hover .gallery-thumb {
+            opacity: 1;
+            border-color: #8b5cf6;
+            transform: translateY(-5px); /* Elevation */
+            box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.3);
+        }
+
+        .thumb-container { flex: 0 0 140px; scroll-snap-align: start; }
+        #featured-display { transition: all 0.5s ease-in-out; }
+    </style>
+</head>
+<body class="bg-rich-black text-text-primary min-h-screen relative overflow-x-hidden">
+
+    <!-- Background Glow -->
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,#2e1065_0%,#0f0f11_70%)] opacity-50 pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-96 h-96 bg-lavender-glow opacity-20 rounded-full blur-[100px] pointer-events-none z-0 animate-pulse-slow"></div>
+
+    <!-- Navigation -->
+    <nav class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center relative z-20 animate-fade-in">
+        <div class="text-2xl font-serif font-bold tracking-tighter text-lavender">AM.</div>
+        <div class="flex gap-8 text-sm font-medium">
+            <a href="../index.html" class="text-text-secondary hover:text-lavender transition-colors">About Me</a>
+            <span class="text-white font-bold border-b-2 border-lavender pb-1 cursor-default">Plaksha</span>
+            <a href="tumo.html" class="text-text-secondary hover:text-lavender transition-colors">TUMO</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 pb-24 relative z-10">
+        
+        <header class="mb-16 mt-8 max-w-4xl animate-slide-up">
+            <span class="text-lavender font-mono text-xs tracking-widest border border-lavender/30 px-3 py-1 rounded-full">CONTENT CREATOR INTERN</span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mt-6 mb-6 leading-tight">
+                Plaksha <span class="text-lavender italic">University</span>
+            </h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-text-secondary border-t border-[#333] pt-8">
+                <div><strong class="block text-white mb-1">Role</strong>Designed graphics & email headers for webinars, workshops, and announcements.</div>
+                <div><strong class="block text-white mb-1">Impact</strong>Produced short-form videos and maintained content calendar consistency.</div>
+                <div><strong class="block text-white mb-1">Timeline</strong>Sep 2025 - Nov 2025 (Remote)</div>
+            </div>
+        </header>
+
+        <section class="mb-32 animate-slide-up" style="animation-delay: 0.2s;">
+            
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-6 mb-10">
+                <!-- Default active tab -->
+                <button onclick="filterGallery('header', 'wide')" class="filter-btn active px-8 py-3 rounded-full text-xl font-bold bg-lavender text-rich-black hover:bg-white transition-all">Email Headers</button>
+                <button onclick="filterGallery('social', 'square')" class="filter-btn px-8 py-3 rounded-full text-xl font-bold border border-[#333] hover:border-lavender hover:text-lavender transition-all">Social Media</button>
+                <button onclick="filterGallery('webinar', 'vertical')" class="filter-btn px-8 py-3 rounded-full text-xl font-bold border border-[#333] hover:border-lavender hover:text-lavender transition-all">Webinar Posts</button>
+            </div>
+
+            <!-- Main Featured Image Display -->
+            <div class="mb-8 p-1 rounded-2xl border border-[#333] bg-card-dark shadow-2xl overflow-hidden">
+                <div id="featured-display" class="relative aspect-[21/9] w-full overflow-hidden rounded-xl bg-black flex items-center justify-center group transition-all duration-500">
+                    <!-- Default Image -->
+                    <img id="featured-image" 
+                         src="header_1.jpg" 
+                         class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105" 
+                         alt="Featured Work">
+                    
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8 pt-20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 text-center">
+                        <p id="featured-caption" class="text-2xl font-serif text-white">Robotics on Real World</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbnail Strip -->
+            <div class="relative group mt-10">
+                <button id="left-arrow" onclick="scrollThumbnails(-1)" class="hidden absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 bg-card-dark/80 backdrop-blur border border-[#333] rounded-full text-white hover:bg-lavender hover:text-rich-black shadow-xl -ml-4 transition-all duration-300">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </button>
+                <button id="right-arrow" onclick="scrollThumbnails(1)" class="hidden absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 bg-card-dark/80 backdrop-blur border border-[#333] rounded-full text-white hover:bg-lavender hover:text-rich-black shadow-xl -mr-4 transition-all duration-300">
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Thumbnails -->
+                <div id="thumbnail-strip" class="flex justify-center gap-4 overflow-x-auto hide-scrollbar pb-4 scroll-smooth scroll-snap-x px-1">
+                    
+                    <!-- --- EMAIL HEADERS --- -->
+                    <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_1.jpg', 'Robotics on Real World', 'wide')">
+                         <div class="gallery-thumb thumb-active h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_1.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+                    <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_2.jpg', 'Level Up Tech Profile', 'wide')">
+                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_2.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+                     <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_3.jpg', 'Sustainable Agriculture', 'wide')">
+                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_3.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+                     <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_4.jpg', 'Water Security & Healthcare', 'wide')">
+                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_4.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+                     <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_5.jpg', 'Ask Me Anything Session', 'wide')">
+                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_5.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+                    <div class="thumb-container gallery-item header min-w-[200px]" onclick="updateFeatured(this, 'header_6.jpg', 'YCL 2026 Launch', 'wide')">
+                         <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                             <img src="header_6.jpg" class="w-full h-full object-cover">
+                         </div>
+                    </div>
+
+                    <!-- --- SOCIAL MEDIA --- -->
+                    <div class="thumb-container gallery-item social" onclick="updateFeatured(this, 'Results_1.jpg', 'Results Arriving In 24h', 'square')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="Results_1.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="thumb-container gallery-item social" onclick="updateFeatured(this, 'results_2.jpg', 'Results Are Out!', 'square')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="results_2.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="thumb-container gallery-item social" onclick="updateFeatured(this, 'countdown.jpg', '1 Week Left', 'square')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="countdown.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    
+                    <!-- --- WEBINAR POSTS (Updated with uploaded files) --- -->
+                    <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_1.jpg', 'Level Up Tech Profile', 'vertical')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="webinar_1.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_2.jpg', 'YCL 2026 Launch', 'vertical')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="webinar_2.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_3.jpg', 'Water Security', 'vertical')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="webinar_3.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="thumb-container gallery-item webinar" onclick="updateFeatured(this, 'webinar_4.jpg', 'Ask Me Anything', 'vertical')">
+                        <div class="gallery-thumb h-full w-full rounded-lg overflow-hidden border border-[#333] relative">
+                            <img src="webinar_4.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Footer -->
+        <footer id="contact" class="py-16 border-t border-[#333] relative">
+            <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-serif text-white mb-6">Ready to collaborate?</h2>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+                <a href="tel:+917977031905" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-[#202020] hover:border-lavender transition-all">
+                    <i data-lucide="phone" class="w-4 h-4 text-lavender"></i><span class="text-sm font-bold text-white">Call Me</span>
+                </a>
+                <a href="mailto:adi.maur7@gmail.com" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-[#202020] hover:border-lavender transition-all">
+                    <i data-lucide="mail" class="w-4 h-4 text-lavender"></i><span class="text-sm font-bold text-white">Email Me</span>
+                </a>
+            </div>
+            <div class="text-text-secondary text-[10px] uppercase tracking-widest opacity-50">© 2025 Aditya Maurya. All Rights Reserved.</div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start with Header since that was the first tab active in HTML
+            filterGallery('header', 'wide'); 
+        });
+
+        function updateFeatured(element, imageSrc, captionText, aspect) {
+            document.querySelectorAll('.gallery-thumb').forEach(thumb => thumb.classList.remove('thumb-active'));
+            element.querySelector('.gallery-thumb').classList.add('thumb-active');
+
+            const featuredImg = document.getElementById('featured-image');
+            const featuredCaption = document.getElementById('featured-caption');
+            const featuredDisplay = document.getElementById('featured-display');
+            
+            // Aspect Ratio Logic
+            featuredDisplay.classList.remove('aspect-[21/9]', 'aspect-[1/1]', 'aspect-[4/5]');
+            
+            if (aspect === 'wide') {
+                featuredDisplay.classList.add('aspect-[21/9]');
+            } else if (aspect === 'square') {
+                featuredDisplay.classList.add('aspect-[1/1]');
+            } else { // vertical (4:5)
+                featuredDisplay.classList.add('aspect-[4/5]');
+            }
+
+            featuredImg.style.opacity = '0';
+            setTimeout(() => {
+                featuredImg.src = imageSrc;
+                featuredCaption.innerText = captionText;
+                featuredImg.style.opacity = '1';
+            }, 200);
+        }
+
+        function scrollThumbnails(direction) {
+            const container = document.getElementById('thumbnail-strip');
+            const scrollAmount = 300;
+            if (direction === 1) container.scrollLeft += scrollAmount;
+            else container.scrollLeft -= scrollAmount;
+        }
+
+        function filterGallery(category, initialAspect) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            const leftArrow = document.getElementById('left-arrow');
+            const rightArrow = document.getElementById('right-arrow');
+            
+            if (category === 'header') {
+                leftArrow.classList.remove('hidden');
+                rightArrow.classList.remove('hidden');
+                document.getElementById('thumbnail-strip').classList.remove('justify-center');
+            } else {
+                leftArrow.classList.add('hidden');
+                rightArrow.classList.add('hidden');
+                document.getElementById('thumbnail-strip').classList.add('justify-center');
+            }
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-lavender', 'text-rich-black');
+                btn.classList.add('border', 'border-[#333]', 'text-text-secondary'); 
+                const visualDiv = btn.querySelector('div');
+                const span = btn.querySelector('span');
+                if (visualDiv) visualDiv.classList.remove('bg-lavender');
+                if (span) span.classList.remove('text-rich-black');
+            });
+
+            const currentButton = document.querySelector(`.filter-btn[onclick*="'${category}'"]`);
+            if (currentButton) {
+                 currentButton.classList.remove('border', 'border-[#333]', 'text-text-secondary');
+                 currentButton.classList.add('bg-lavender', 'text-rich-black');
+            }
+
+            let firstVisibleItem = null;
+            items.forEach(item => {
+                if (item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    if (!firstVisibleItem) firstVisibleItem = item;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            if (firstVisibleItem) {
+                const img = firstVisibleItem.querySelector('img');
+                // Simple logic to set default captions/aspects if switching tabs
+                let defaultCaption = 'Featured Work';
+                const src = img.getAttribute('src');
+                if(src.includes('webinar')) defaultCaption = 'Webinar Post';
+                else if(src.includes('header')) defaultCaption = 'Email Header';
+                else defaultCaption = 'Social Media Post';
+
+                updateFeatured(firstVisibleItem, src, defaultCaption, initialAspect);
+            }
+            document.getElementById('thumbnail-strip').scrollLeft = 0;
+        }
+    </script>
+</body>
+</html>
