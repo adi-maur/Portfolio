@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edtech Society | Social Media & Content</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'rich-black': '#0f0f11',
+              'card-dark': '#18181b',
+              'lavender': '#c4b5fd',
+              'lavender-glow': '#8b5cf6',
+              'text-primary': '#f3f4f6',
+              'text-secondary': '#9ca3af',
+              'wrapped-green': '#1DB954', 
+              'wrapped-pink': '#ff0080',
+              'edtech-yellow': '#F59E0B', 
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.8s ease-out forwards',
+                'slide-up': 'slideUp 0.8s ease-out forwards',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 3s ease-in-out infinite',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                slideUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { scrollbar-color: #333 #0f0f11; scrollbar-width: thin; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Wrapped Card Styles */
+        .wrapped-card {
+            background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+        }
+        /* Enhanced Hover Effect for Wrapped Cards */
+        .wrapped-card:hover {
+            transform: scale(1.05) translateY(-8px); /* More pronounced levitation */
+            box-shadow: 0 25px 30px -5px rgba(139, 92, 246, 0.25), 0 10px 10px -5px rgba(245, 158, 11, 0.2); /* Stronger purple/yellow glow */
+            border-color: #8b5cf6; /* Border turns lavender glow */
+            z-index: 10; /* Bring to front */
+        }
+        
+        /* General Levitate & Glow Class */
+        .hover-levitate {
+            transition: all 0.3s ease-out;
+        }
+        .hover-levitate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.3); /* Purple glow shadow */
+            border-color: #8b5cf6;
+        }
+    </style>
+</head>
+<body class="bg-rich-black text-text-primary min-h-screen relative overflow-x-hidden">
+
+    <!-- Background Glow -->
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,#2e1065_0%,#0f0f11_70%)] opacity-50 pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-96 h-96 bg-lavender-glow opacity-20 rounded-full blur-[100px] pointer-events-none z-0 animate-pulse-slow"></div>
+
+    <!-- Navigation -->
+    <nav class="w-full max-w-7xl mx-auto p-6 flex justify-between items-center relative z-20 animate-fade-in">
+        <div class="text-2xl font-serif font-bold tracking-tighter text-lavender hover:text-white transition-colors duration-300 cursor-pointer hover:scale-105 transform">AM.</div>
+        <div class="flex gap-8 text-sm font-medium">
+            <a href="../index.html" class="text-text-secondary hover:text-lavender transition-all duration-300 hover:-translate-y-0.5">About Me</a>
+            <span class="text-white font-bold border-b-2 border-lavender pb-1 cursor-default">Edtech</span>
+            <a href="plaksha.html" class="text-text-secondary hover:text-lavender transition-all duration-300 hover:-translate-y-0.5">Plaksha</a>
+            <a href="tumo.html" class="text-text-secondary hover:text-lavender transition-all duration-300 hover:-translate-y-0.5">TUMO</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 pb-24 relative z-10">
+        
+        <!-- Hero Section -->
+        <header class="mb-16 mt-8 max-w-4xl animate-slide-up">
+            <span class="text-lavender font-mono text-xs tracking-widest border border-lavender/30 px-3 py-1 rounded-full hover:bg-lavender/10 transition-colors cursor-default">SOCIAL MEDIA & CONTENT</span>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mt-6 mb-6 leading-tight group cursor-default">
+                Edtech <span class="text-lavender italic group-hover:text-white transition-colors duration-500">Society</span>
+            </h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-text-secondary border-t border-[#333] pt-8">
+                <div class="hover:text-white transition-colors duration-300"><strong class="block text-white mb-1">Role</strong>Social Media Content Creator & Consultant.</div>
+                <div class="hover:text-white transition-colors duration-300"><strong class="block text-white mb-1">Impact</strong>Increased engagement by 100% via Reels & Posts.</div>
+                <div class="hover:text-white transition-colors duration-300"><strong class="block text-white mb-1">Timeline</strong>Oct 2024 - Mar 2025 (Remote)</div>
+            </div>
+        </header>
+
+        <!-- Main Banner Display -->
+        <section class="mb-24 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="rounded-3xl overflow-hidden border border-[#333] shadow-2xl relative aspect-[21/9] group hover-levitate"> <!-- Added hover-levitate -->
+                <img src="t4e website.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="T4E Website Banner">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            </div>
+            <p class="text-center text-sm text-text-secondary mt-4 font-mono">Official Website Banner designed for the T4E Conference.</p>
+        </section>
+
+        <!-- "Spotify Wrapped" Style Section -->
+        <section class="mb-32 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="p-3 bg-card-dark border border-[#333] rounded-full text-lavender group hover:bg-lavender hover:text-rich-black transition-all duration-300">
+                    <i data-lucide="sparkles" class="w-6 h-6 group-hover:animate-spin"></i> <!-- Spin on hover -->
+                </div>
+                <h2 class="text-4xl font-serif text-white">Edtech Society <span class="italic text-lavender">Wrapped</span></h2>
+            </div>
+            <p class="text-text-secondary mb-10 max-w-2xl">
+                Inspired by the viral "Spotify Wrapped", I designed a year-in-review presentation to celebrate the community's milestones in an engaging, shareable format.
+            </p>
+
+            <!-- PPT Download / View Container -->
+            <div class="rounded-[2.5rem] border border-[#333] bg-card-dark p-8 md:p-12 relative overflow-hidden group hover:border-lavender-glow/50 transition-colors duration-500"> <!-- Glow border on hover -->
+                <!-- Decorative Glow -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-lavender/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-80"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-wrapped-green/20 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-80"></div>
+
+                <div class="flex flex-col md:flex-row items-center gap-12 relative z-10">
+                    <div class="w-full md:w-1/3 text-center md:text-left space-y-6">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-lavender/20 border border-lavender/40 text-lavender text-xs font-bold tracking-widest uppercase mb-2">
+                            Year in Review
+                        </div>
+                        <h3 class="text-3xl font-serif text-white leading-tight">
+                            The Full <br/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-lavender to-white group-hover:to-lavender-glow transition-all duration-500">Wrapped Experience</span>
+                        </h3>
+                        <p class="text-text-secondary group-hover:text-white transition-colors duration-300">
+                            View the complete slide deck detailing the community's 440+ members, 11 masterclasses, and top genres of the year.
+                        </p>
+                        
+                        <!-- Download/View Button with enhanced hover -->
+                        <a href="Et Society Wrapped.pptx" download class="inline-flex items-center gap-3 px-8 py-4 bg-white text-rich-black rounded-full font-bold hover:bg-lavender hover:text-black transition-all transform hover:scale-110 hover:-translate-y-1 shadow-xl hover:shadow-lavender/40 active:scale-95">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            Download PPT Presentation
+                        </a>
+                    </div>
+
+                    <!-- Visual Representation of the PPT (Mockup) -->
+                    <div class="w-full md:w-2/3 grid grid-cols-2 gap-4 opacity-90 group-hover:opacity-100 transition-opacity">
+                        <!-- Cards with hover lift -->
+                        <div class="aspect-video bg-[#222] rounded-xl border border-[#333] p-4 flex flex-col justify-center items-center text-center transform -rotate-2 group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-edtech-yellow/20 group-hover:border-edtech-yellow/50 transition-all duration-500 shadow-2xl">
+                            <span class="text-edtech-yellow text-4xl font-bold mb-2">440</span>
+                            <span class="text-gray-400 text-xs uppercase tracking-widest">Active Members</span>
+                        </div>
+                        <div class="aspect-video bg-[#222] rounded-xl border border-[#333] p-4 flex flex-col justify-center items-center text-center transform rotate-2 group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-wrapped-pink/20 group-hover:border-wrapped-pink/50 transition-all duration-500 shadow-2xl mt-8">
+                            <span class="text-wrapped-pink text-4xl font-bold mb-2">11</span>
+                            <span class="text-gray-400 text-xs uppercase tracking-widest">Masterclasses</span>
+                        </div>
+                        <div class="aspect-video bg-[#222] rounded-xl border border-[#333] p-4 flex flex-col justify-center items-center text-center transform rotate-1 group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-wrapped-green/20 group-hover:border-wrapped-green/50 transition-all duration-500 shadow-2xl">
+                            <span class="text-wrapped-green text-4xl font-bold mb-2">312</span>
+                            <span class="text-gray-400 text-xs uppercase tracking-widest">Participants</span>
+                        </div>
+                        <div class="aspect-video bg-gradient-to-br from-edtech-yellow/20 to-wrapped-pink/20 rounded-xl border border-[#333] p-4 flex justify-center items-center transform -rotate-1 group-hover:rotate-0 group-hover:scale-105 group-hover:shadow-xl transition-all duration-500 shadow-2xl mt-8">
+                            <span class="text-white font-serif italic text-lg text-center">Top Genre: <br/>Edtech</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Grid -->
+        <section class="mb-32 animate-slide-up" style="animation-delay: 0.3s;">
+            <h2 class="text-3xl font-serif text-white mb-8 border-b border-[#333] pb-4">Social Media Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Instagram Post 1 -->
+                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] aspect-square md:aspect-[4/5] bg-card-dark hover-levitate cursor-pointer"> <!-- Added hover-levitate -->
+                    <img src="featured member.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Featured Member Post">
+                    <div class="absolute inset-0 bg-gradient-to-t from-rich-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-lavender font-bold tracking-wider text-sm mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">INSTAGRAM</span>
+                        <h3 class="text-2xl font-serif text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">Community Spotlight</h3>
+                    </div>
+                </div>
+
+                <!-- Instagram Post 2 -->
+                <div class="group relative rounded-[2rem] overflow-hidden border border-[#333] aspect-square md:aspect-[4/5] bg-card-dark hover-levitate cursor-pointer"> <!-- Added hover-levitate -->
+                    <img src="Untitled (Instagram Post).jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Tech for Inclusive Education">
+                    <div class="absolute inset-0 bg-gradient-to-t from-rich-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-lavender font-bold tracking-wider text-sm mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">INSTAGRAM</span>
+                        <h3 class="text-2xl font-serif text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">Inclusive Tech</h3>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Video Production Section -->
+        <section class="mb-24 animate-slide-up" style="animation-delay: 0.4s;">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-serif text-white">Video Production</h2>
+                <div class="flex gap-2">
+                    <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                    <span class="text-xs font-mono text-red-500">REC</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Video 1 -->
+                <div class="rounded-[2rem] border border-[#333] bg-black overflow-hidden relative shadow-2xl hover-levitate"> <!-- Added hover-levitate -->
+                    <video controls class="w-full h-auto aspect-video object-cover" poster="https://placehold.co/600x400/111/333?text=Video+Loading...">
+                        <source src="4th.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="p-6 bg-card-dark border-t border-[#333] group hover:bg-[#202020] transition-colors">
+                        <h3 class="text-xl font-serif text-white group-hover:text-lavender transition-colors">4th Edition Teaser</h3>
+                        <p class="text-sm text-text-secondary mt-1">Short-form teaser content for the annual event.</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="rounded-[2rem] border border-[#333] bg-black overflow-hidden relative shadow-2xl hover-levitate"> <!-- Added hover-levitate -->
+                    <video controls class="w-full h-auto aspect-video object-cover" poster="https://placehold.co/600x400/111/333?text=Video+Loading...">
+                        <source src="T4E Location.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="p-6 bg-card-dark border-t border-[#333] group hover:bg-[#202020] transition-colors">
+                        <h3 class="text-xl font-serif text-white group-hover:text-lavender transition-colors">Location Reveal</h3>
+                        <p class="text-sm text-text-secondary mt-1">Showcasing the venue at IIT Gandhinagar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Footer -->
+        <footer id="contact" class="py-16 border-t border-[#333] relative">
+            <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-serif text-white mb-6">Ready to collaborate?</h2>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+                <a href="tel:+917977031905" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-lavender-glow hover:text-white hover:border-lavender-glow transition-all transform hover:scale-105 active:scale-95 shadow-lg group">
+                    <i data-lucide="phone" class="w-4 h-4 text-lavender group-hover:text-white"></i><span class="text-sm font-bold text-white">Call Me</span>
+                </a>
+                <a href="mailto:adi.maur7@gmail.com" class="flex items-center gap-3 px-6 py-3 bg-card-dark border border-[#333] rounded-full hover:bg-lavender-glow hover:text-white hover:border-lavender-glow transition-all transform hover:scale-105 active:scale-95 shadow-lg group">
+                    <i data-lucide="mail" class="w-4 h-4 text-lavender group-hover:text-white"></i><span class="text-sm font-bold text-white">Email Me</span>
+                </a>
+            </div>
+            <div class="text-text-secondary text-[10px] uppercase tracking-widest opacity-50">© 2025 Aditya Maurya. All Rights Reserved.</div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
