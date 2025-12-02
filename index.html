@@ -246,11 +246,15 @@
                     </div>
                   </div>
 
-                  {/* Profile Image Area - ensuring mypic.jpg is used */}
+                  {/* Profile Image Area - ensuring mypic.jpg is used with Fallback */}
                   <div className="w-full md:w-1/2 relative order-1 md:order-2">
                     <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-card-dark border border-[#333] shadow-2xl shadow-lavender/10 group rotate-2 hover:rotate-0 transition-transform duration-700 ring-1 ring-white/10 hover:ring-lavender-glow/50">
                        <img 
-                         src="mypic.jpg" 
+                         src="mypic.png" 
+                         onError={(e) => {
+                           e.target.onerror = null; 
+                           e.target.src = "https://ui-avatars.com/api/?name=Aditya+Maurya&background=c4b5fd&color=0f0f11&size=512";
+                         }}
                          alt="Aditya Maurya Profile" 
                          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" 
                        />
